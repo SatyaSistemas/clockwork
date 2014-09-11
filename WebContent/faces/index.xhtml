@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Hello World</title>
+</h:head>
+<h:body>
+	<div id="content" style="width:800px">
+		<p:tabMenu activeIndex="0">
+			<p:menuitem value="Backlog" outcome="index" icon="ui-icon-star">
+				<f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="Sprints" outcome="index">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+			<p:menuitem value="Revisões" outcome="index">
+				<f:param name="i" value="2" />
+			</p:menuitem>
+			<p:menuitem value="Impedimentos" outcome="index">
+				<f:param name="i" value="3" />
+			</p:menuitem>
+		</p:tabMenu>
+	</div>
+</h:body>
+</html>

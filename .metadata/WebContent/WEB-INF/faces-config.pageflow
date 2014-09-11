@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14104668263180" configfile="/ClockWork/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="faces/index.xhtml" x="225" y="147" id="pf14104668666191" path="/faces/index.xhtml"/>
+</pageflow:Pageflow>
