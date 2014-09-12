@@ -44,8 +44,10 @@
 								<p:column>
 									<p:outputLabel value="Solicitante:" />
 									<br />
-									<p:inputText id="solicitante"
-										value="#{backlogBean.productBacklog.solicitante}" />
+									<p:selectOneMenu id="country" value="#{backlogBean.productBacklog.solicitante}" >
+										<f:selectItem itemLabel="Selecione o usuário" itemValue="" noSelectionOption="true" />
+										<f:selectItems value="#{backlogBean.usuarios}" />
+									</p:selectOneMenu>
 								</p:column>
 								<p:column>
 									<p:outputLabel value="Notas:" />
@@ -72,7 +74,8 @@
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="5,10,15">
 
-						<p:ajax event="cellEdit" listener="#{backlogBean.onCellEdit(backlog)}"
+						<p:ajax event="cellEdit"
+							listener="#{backlogBean.onCellEdit(backlog)}"
 							update=":listItems:listMsgs" />
 
 						<p:column style="width:32px">
@@ -93,24 +96,59 @@
 						</p:column>
 
 						<p:column headerText="Importância">
-							<h:outputText value="#{backlog.importancia}" />
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{backlog.importancia}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="importancia" value="#{backlog.importancia}" />
+								</f:facet>
+							</p:cellEditor>
 						</p:column>
 
 						<p:column headerText="Estimativa">
-							<h:outputText value="#{backlog.estimativa}" />
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{backlog.estimativa}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="estimativa" value="#{backlog.estimativa}" />
+								</f:facet>
+							</p:cellEditor>
 						</p:column>
 
 						<p:column headerText="Demonstracao">
-							<h:outputText value="#{backlog.demonstracao}" />
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{backlog.demonstracao}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="demonstracao" value="#{backlog.demonstracao}" />
+								</f:facet>
+							</p:cellEditor>
 						</p:column>
 
 						<p:column headerText="Notas">
-							<h:outputText value="#{backlog.notas}" />
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{backlog.notas}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="notas" value="#{backlog.notas}" />
+								</f:facet>
+							</p:cellEditor>
 						</p:column>
 
 
 						<p:column headerText="Solicitante">
-							<h:outputText value="#{backlog.solicitante}" />
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{backlog.solicitante}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="solicitante" value="#{backlog.solicitante}" />
+								</f:facet>
+							</p:cellEditor>
 						</p:column>
 
 						<p:column headerText="Ações" style="width:32px">

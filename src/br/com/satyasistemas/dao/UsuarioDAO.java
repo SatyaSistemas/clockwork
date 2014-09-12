@@ -1,5 +1,6 @@
 package br.com.satyasistemas.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,8 +8,12 @@ import javax.persistence.Query;
 
 import br.com.satyasistemas.dao.entity.Usuario;
 
-public class UsuarioDAO implements DAO<Usuario>{
+public class UsuarioDAO implements DAO<Usuario>,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EntityManager entityManager;
 	
 	public UsuarioDAO() {

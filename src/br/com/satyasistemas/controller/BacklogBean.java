@@ -8,12 +8,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionListener;
-
-import org.primefaces.event.CellEditEvent;
 
 import br.com.satyasistemas.dao.ProductBacklogDAO;
+import br.com.satyasistemas.dao.UsuarioDAO;
 import br.com.satyasistemas.dao.entity.ProductBacklog;
+import br.com.satyasistemas.dao.entity.Usuario;
 
 @ManagedBean(name = "backlogBean")
 @ViewScoped
@@ -25,6 +24,7 @@ public class BacklogBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private ProductBacklogDAO backlogDAO;
+	private UsuarioDAO usuarioDAO;
 
 	private List<ProductBacklog> itensBacklog = new ArrayList<ProductBacklog>();
 	private ProductBacklog productBacklog;
@@ -32,6 +32,7 @@ public class BacklogBean implements Serializable {
 	public BacklogBean() {
 		backlogDAO = new ProductBacklogDAO();
 		productBacklog = new ProductBacklog();
+		usuarioDAO = new UsuarioDAO();
 	}
 
 	public List<ProductBacklog> getItensBacklog() {
@@ -69,4 +70,9 @@ public class BacklogBean implements Serializable {
 		System.out.println(backlog);
 		backlogDAO.save(backlog);
 	}
+	
+	public List<Usuario> getUsuarios(){
+		return usuarioDAO.list();
+	}
+	
 }

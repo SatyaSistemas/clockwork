@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/faces/templates/layout.xhtml">
+		<ui:define name="rightPanel"></ui:define>
+		<ui:define name="leftPanel"></ui:define>
+		<ui:define name="content">
+			<p:panel>
+				<h:form id="regUser">
+					<p:fieldset legend="Cadastro de Usuários" toggleable="true">
+						<p:panelGrid>
+							<p:row>
+								<p:column>
+									<p:outputLabel value="Nome:" />
+									<br />
+									<p:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
+								</p:column>
+
+								<p:column>
+									<p:commandButton id="add" value="Salvar" update=":listUsers"
+										actionListener="#{usuarioBean.addUser}" icon="ui-icon-check" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:fieldset>
+				</h:form>
+				<br />
+				<br />
+				<h:form id="listUsers">
+					<p:dataTable value="#{usuarioBean.usuarios}" var="usuario">
+						<p:column style="width:32px">
+							<h:selectBooleanCheckbox />
+						</p:column>
+						<p:column headerText="Id">
+							<h:outputText value="#{usuario.nome}" />
+						</p:column>
+
+						<p:column headerText="Usuário">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{usuario.nome}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nome" value="#{usuario.nome}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

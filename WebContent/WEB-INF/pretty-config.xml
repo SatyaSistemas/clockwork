@@ -6,11 +6,15 @@
 		<pattern value="/backlog" />
 		<view-id value="/faces/backlog.xhtml" />
 	</url-mapping>
-	
+
 	<url-mapping id="sprints">
 		<pattern value="/sprints" />
 		<view-id value="/faces/sprints.xhtml" />
 	</url-mapping>
 
+	<url-mapping id="usuarios">
+		<pattern value="/usuarios" />
+		<view-id value="/faces/usuarios.xhtml" />
+	</url-mapping>
 
 </pretty-config>
