@@ -12,74 +12,98 @@
 		<ui:define name="leftPanel"></ui:define>
 		<ui:define name="content">
 			<p:panel>
-				<p:fieldset legend="Cadastro Itens Backlog" toggleable="true">
-					<p:panelGrid>
-						<p:row>
-							<p:column>
-								<p:outputLabel value="Nome:" /><br/>
-								<p:inputText id="nome" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Importância:" /><br/>
-								<p:inputText id="importancia" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Estimativa:" /><br/>
-								<p:inputText id="estimativa" />
-							</p:column>
-							<p:column></p:column>
-							<p:outputLabel value="Demonstração:" /><br/>
-							<p:inputText id="demonstracao" />
-							<p:column>
-								<p:outputLabel value="Solicitante:" /><br/>
-								<p:inputText id="solicitante" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Notas:" /><br/>
-								<p:inputText id="notas" />
-							</p:column>
-							<p:column>
-								<p:commandButton id="add" value="Salvar" action="#{indexBean.addBacklogItem}" icon="ui-icon-check" />
-							</p:column>
-						</p:row>
-	
-					</p:panelGrid>
-				</p:fieldset>
+				<h:form id="regItem">
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" />
+					<p:fieldset legend="Cadastro Itens Backlog" toggleable="true">
+						<p:panelGrid>
+							<p:row>
+								<p:column>
+									<p:outputLabel value="Nome:" />
+									<br />
+									<p:inputText id="nome"
+										value="#{backlogBean.productBacklog.nome}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Importância:" />
+									<br />
+									<p:inputText id="importancia"
+										value="#{backlogBean.productBacklog.importancia}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Estimativa:" />
+									<br />
+									<p:inputText id="estimativa"
+										value="#{backlogBean.productBacklog.estimativa}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Demonstração:" />
+									<br />
+									<p:inputText id="demonstracao"
+										value="#{backlogBean.productBacklog.demonstracao}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Solicitante:" />
+									<br />
+									<p:inputText id="solicitante"
+										value="#{backlogBean.productBacklog.solicitante}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Notas:" />
+									<br />
+									<p:inputText id="notas"
+										value="#{backlogBean.productBacklog.notas}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="add" value="Salvar" update=":listItems"
+										actionListener="#{backlogBean.addBacklogItem}"
+										icon="ui-icon-check" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:fieldset>
+				</h:form>
 				<br />
 				<br />
-				<p:dataTable value="#{indexBean.itensBacklog}" var="backlog">
-					<p:column style="width:32px">
-						<h:selectBooleanCheckbox />
-					</p:column>
-					<p:column headerText="Id">
-						<h:outputText value="#{backlog.id}" />
-					</p:column>
-	
-					<p:column headerText="Importância">
-						<h:outputText value="#{backlog.importancia}" />
-					</p:column>
-	
-					<p:column headerText="Estimativa">
-						<h:outputText value="#{backlog.estimativa}" />
-					</p:column>
-	
-					<p:column headerText="Demonstracao">
-						<h:outputText value="#{backlog.demonstracao}" />
-					</p:column>
-	
-					<p:column headerText="Notas">
-						<h:outputText value="#{backlog.notas}" />
-					</p:column>
-	
-	
-					<p:column headerText="Solicitante">
-						<h:outputText value="#{backlog.solicitante}" />
-					</p:column>
-	
-					<p:column headerText="Ações" style="width:32px">
-						<p:rowEditor />
-					</p:column>
-				</p:dataTable>
+				<h:form id="listItems">
+					<p:dataTable value="#{backlogBean.itensBacklog}" var="backlog"
+						rows="10" paginator="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+
+						<p:column style="width:32px">
+							<h:selectBooleanCheckbox />
+						</p:column>
+						<p:column headerText="Id">
+							<h:outputText value="#{backlog.id}" />
+						</p:column>
+
+						<p:column headerText="Importância">
+							<h:outputText value="#{backlog.importancia}" />
+						</p:column>
+
+						<p:column headerText="Estimativa">
+							<h:outputText value="#{backlog.estimativa}" />
+						</p:column>
+
+						<p:column headerText="Demonstracao">
+							<h:outputText value="#{backlog.demonstracao}" />
+						</p:column>
+
+						<p:column headerText="Notas">
+							<h:outputText value="#{backlog.notas}" />
+						</p:column>
+
+
+						<p:column headerText="Solicitante">
+							<h:outputText value="#{backlog.solicitante}" />
+						</p:column>
+
+						<p:column headerText="Ações" style="width:32px">
+							<p:rowEditor />
+						</p:column>
+					</p:dataTable>
+				</h:form>
 			</p:panel>
 		</ui:define>
 	</ui:composition>

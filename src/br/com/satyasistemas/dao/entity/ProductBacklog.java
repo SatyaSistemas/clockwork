@@ -19,6 +19,7 @@ public class ProductBacklog implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id;
+	private String nome;
 	private int importancia;
 	private int estimativa;
 	private String demonstracao;
@@ -31,6 +32,14 @@ public class ProductBacklog implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public int getImportancia() {

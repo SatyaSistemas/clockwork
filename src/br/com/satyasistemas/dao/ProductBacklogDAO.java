@@ -1,5 +1,6 @@
 package br.com.satyasistemas.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,8 +8,12 @@ import javax.persistence.Query;
 
 import br.com.satyasistemas.dao.entity.ProductBacklog;
 
-public class ProductBacklogDAO implements DAO<ProductBacklog>{
+public class ProductBacklogDAO implements DAO<ProductBacklog>, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EntityManager entityManager;
 	
 	public ProductBacklogDAO() {
@@ -19,12 +24,7 @@ public class ProductBacklogDAO implements DAO<ProductBacklog>{
 	@Override
 	public void save(ProductBacklog backlog) {
 		beginTransaction();
-		
-		if(backlog.getId() <= 0)
-			entityManager.persist(backlog);
-		else
-			entityManager.merge(backlog);
-		
+		entityManager.persist(backlog);
 		closeTransaction();
 	}
 
