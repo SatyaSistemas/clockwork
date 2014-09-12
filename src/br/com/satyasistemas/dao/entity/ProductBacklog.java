@@ -1,5 +1,7 @@
 package br.com.satyasistemas.dao.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,7 +11,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "product_backlog")
 @NamedQuery(name = "findAll", query = "select pb from ProductBacklog pb")
-public class ProductBacklog {
+public class ProductBacklog implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private int id;

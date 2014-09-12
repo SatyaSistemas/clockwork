@@ -18,20 +18,26 @@ public class ProductBacklogDAO implements DAO<ProductBacklog>{
 
 	@Override
 	public void save(ProductBacklog backlog) {
-		entityManager.getTransaction().begin();
-		entityManager.persist(backlog);
-		entityManager.getTransaction().commit();
+		beginTransaction();
+		
+		if(backlog.getId() <= 0)
+			entityManager.persist(backlog);
+		else
+			entityManager.merge(backlog);
+		
+		closeTransaction();
 	}
 
 	@Override
 	public ProductBacklog findById(int id) {		
 		return null;
 	}
-
+	
 	@Override
 	public void delete(ProductBacklog backlog) {
+		beginTransaction();
 		entityManager.remove(backlog);
-		
+		closeTransaction();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -45,6 +51,14 @@ public class ProductBacklogDAO implements DAO<ProductBacklog>{
 	public List<ProductBacklog> pageList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private void beginTransaction(){
+		entityManager.getTransaction().begin();
+	}
+	
+	private void closeTransaction(){
+		entityManager.getTransaction().commit();
 	}
 	
 }
