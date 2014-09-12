@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration scan="true" scanPeriod="3 seconds" debug="true">
+
+	<contextName>Flux2</contextName>
+	<property name="LOGS_FOLDER" value="${catalina.home}/logs/"/>
+	<property name="CONTEXT_NAME" value="Flux2"/>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d %contextName [%t] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOGS_FOLDER}${HOSTNAME}-${CONTEXT_NAME}.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} %contextName [%t] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${LOGS_FOLDER}${HOSTNAME}-${CONTEXT_NAME}.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>100</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>2MB</MaxFileSize>
+		</triggeringPolicy>
+		
+	</appender>
+	
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
+
+	<logger name="javax.faces" level="ERROR" />
+	<logger name="org.hibernate.type" level="ERROR" />
+	<logger name="org.hibernate" level="ERROR" />
+
+	<root level="ERROR">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>	

@@ -8,23 +8,108 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Hello World</title>
+	<h:outputStylesheet name="css/default.css" />
 </h:head>
 <h:body>
-	<div id="content" style="width:800px">
-		<p:tabMenu activeIndex="0">
-			<p:menuitem value="Backlog" outcome="index" icon="ui-icon-star">
-				<f:param name="i" value="0" />
-			</p:menuitem>
-			<p:menuitem value="Sprints" outcome="index">
-				<f:param name="i" value="1" />
-			</p:menuitem>
-			<p:menuitem value="Revisões" outcome="index">
-				<f:param name="i" value="2" />
-			</p:menuitem>
-			<p:menuitem value="Impedimentos" outcome="index">
-				<f:param name="i" value="3" />
-			</p:menuitem>
-		</p:tabMenu>
+	<div id="header"
+		style="width: 100%; height: 45px; background-color: rgba(35, 34, 34, 1)">
+		<h4 style="color: white">ClockWork</h4>
+	</div>
+
+	<div id="content">
+
+		<p:panel>
+			<p:tabMenu activeIndex="0">
+				<p:menuitem value="Backlog" outcome="index" icon="ui-icon-star">
+					<f:param name="i" value="0" />
+				</p:menuitem>
+				<p:menuitem value="Sprints" outcome="index">
+					<f:param name="i" value="1" />
+				</p:menuitem>
+				<p:menuitem value="Revisões" outcome="index">
+					<f:param name="i" value="2" />
+				</p:menuitem>
+				<p:menuitem value="Impedimentos" outcome="index">
+					<f:param name="i" value="3" />
+				</p:menuitem>
+			</p:tabMenu>
+			<br />
+			<br />
+
+			<p:fieldset legend="Cadastro Itens Backlog" toggleable="true">
+				<p:panelGrid>
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Nome:" />
+							<br />
+							<p:inputText id="nome" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="Importância" />
+							<p:inputText id="importancia" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="Estimativa" />
+							<p:inputText id="estimativa" />
+						</p:column>
+						<p:column></p:column>
+						<p:outputLabel value="Demonstracao" />
+						<p:inputText id="demonstracao" />
+						<p:column>
+							<p:outputLabel value="Solicitante" />
+							<p:inputText id="solicitante" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="Notas" />
+							<p:inputText id="notas" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="Estimativa" />
+							<p:inputText id="estimativa" />
+						</p:column>
+						<p:column>
+							<p:commandButton action="#{indexBean.addBacklogItem}" />
+						</p:column>
+					</p:row>
+
+				</p:panelGrid>
+			</p:fieldset>
+			<br />
+			<br />
+			<p:dataTable value="#{indexBean.itensBacklog}" var="backlog">
+				<p:column style="width:32px">
+					<h:selectBooleanCheckbox />
+				</p:column>
+				<p:column headerText="Id">
+					<h:outputText value="#{backlog.id}" />
+				</p:column>
+
+				<p:column headerText="Importância">
+					<h:outputText value="#{backlog.importancia}" />
+				</p:column>
+
+				<p:column headerText="Estimativa">
+					<h:outputText value="#{backlog.estimativa}" />
+				</p:column>
+
+				<p:column headerText="Demonstracao">
+					<h:outputText value="#{backlog.demonstracao}" />
+				</p:column>
+
+				<p:column headerText="Notas">
+					<h:outputText value="#{backlog.notas}" />
+				</p:column>
+
+
+				<p:column headerText="Solicitante">
+					<h:outputText value="#{backlog.solicitante}" />
+				</p:column>
+
+				<p:column headerText="Ações" style="width:32px">
+					<p:rowEditor />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
 	</div>
 </h:body>
 </html>
