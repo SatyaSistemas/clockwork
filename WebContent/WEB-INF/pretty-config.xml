@@ -1,0 +1,16 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<url-mapping id="backlog">
+		<pattern value="/backlog" />
+		<view-id value="/faces/backlog.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="sprints">
+		<pattern value="/sprints" />
+		<view-id value="/faces/sprints.xhtml" />
+	</url-mapping>
+
+
+</pretty-config>
