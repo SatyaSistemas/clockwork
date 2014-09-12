@@ -10,25 +10,27 @@
 <body>
 	<ui:composition>
 		<pe:layoutPane id="header" position="north" resizable="false" closable="false" size="90" style="border: 0;">
+			<div style="width:100%;	height:4em;	border-collapse: separate;">
 			<div style="width: 100%; 
-				height: 30px; 
+				height: 40px; 
 				background-color: rgba(35, 34, 34, 1)">
 					<p:outputLabel styleClass="header-title" >Clockwork</p:outputLabel>
 			</div>
-			<p:tabMenu activeIndex="0">
-				<p:menuitem value="Backlog" outcome="index" icon="ui-icon-star">
+			<p:tabMenu activeIndex="#{param.i}">
+				<p:menuitem value="Backlog" outcome="backlog" icon="ui-icon-star">
 					<f:param name="i" value="0" />
 				</p:menuitem>
-				<p:menuitem value="Sprints" outcome="index">
+				<p:menuitem value="Sprints" outcome="sprints">
 					<f:param name="i" value="1" />
 				</p:menuitem>
-				<p:menuitem value="Revisões" outcome="index">
+				<p:menuitem value="Revisões" outcome="backlog">
 					<f:param name="i" value="2" />
 				</p:menuitem>
-				<p:menuitem value="Impedimentos" outcome="index">
+				<p:menuitem value="Impedimentos" outcome="backlog">
 					<f:param name="i" value="3" />
 				</p:menuitem>
 			</p:tabMenu>
+			</div>
 		</pe:layoutPane>
 	</ui:composition>
 </body>

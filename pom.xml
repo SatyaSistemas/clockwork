@@ -50,6 +50,11 @@
 			<version>2.1.0</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.myfaces.core</groupId>
+			<artifactId>myfaces-bundle</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.25</version>
@@ -172,6 +177,17 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-servlet</artifactId>
+			<version>2.0.8.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-config-prettyfaces</artifactId>
+			<version>2.0.8.Final</version>
+		</dependency>
+		
 	</dependencies>
 
 	<repositories>
@@ -180,6 +196,11 @@
 			<name>PrimeFaces Maven Repository</name>
 			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>ocpsoft.prettyfaces</id>
+			<name>PrettyFaces repository</name>
+			<url>http://ocpsoft.com/repository</url>
 		</repository>
 	</repositories>
 </project>

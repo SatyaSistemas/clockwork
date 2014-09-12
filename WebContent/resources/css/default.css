@@ -17,6 +17,6 @@ vertical-align:baseline;
 	border:none;
 }
 
-#header > .ui-layout-unit-content {
+#header.pe-layout-pane-content {
 	padding: 0 !important;
 }

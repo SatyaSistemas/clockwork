@@ -1,6 +1,7 @@
 package br.com.satyasistemas.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -20,11 +21,11 @@ public class IndexBean implements Serializable{
 	
 	private ProductBacklogDAO backlogDAO;
 	
+	private List<ProductBacklog> itensBacklog = new ArrayList<ProductBacklog>();
+	
 	public IndexBean(){
 		backlogDAO = new ProductBacklogDAO();
 	}
-	
-	private List<ProductBacklog> itensBacklog;
 
 	public List<ProductBacklog> getItensBacklog() {
 		return backlogDAO.list();
