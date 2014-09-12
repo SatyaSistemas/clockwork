@@ -5,50 +5,50 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.satyasistemas.dao.entity.ProductBacklog;
+import br.com.satyasistemas.dao.entity.Impedimento;
 
-public class ProductBacklogDAO implements DAO<ProductBacklog>{
+public class ImpedimentoDAO implements DAO<Impedimento>{
 	
 	private EntityManager entityManager;
 	
-	public ProductBacklogDAO() {
+	public ImpedimentoDAO() {
 		super();
 		this.entityManager = DatabaseUtil.getEmf().createEntityManager();
 	}
 
 	@Override
-	public void save(ProductBacklog backlog) {
+	public void save(Impedimento impedimento) {
 		beginTransaction();
 		
-		if(backlog.getId() <= 0)
-			entityManager.persist(backlog);
+		if(impedimento.getId() <= 0)
+			entityManager.persist(impedimento);
 		else
-			entityManager.merge(backlog);
+			entityManager.merge(impedimento);
 		
 		closeTransaction();
 	}
 
 	@Override
-	public ProductBacklog findById(int id) {		
+	public Impedimento findById(int id) {		
 		return null;
 	}
 	
 	@Override
-	public void delete(ProductBacklog backlog) {
+	public void delete(Impedimento impedimento) {
 		beginTransaction();
-		entityManager.remove(backlog);
+		entityManager.remove(impedimento);
 		closeTransaction();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ProductBacklog> list() {
+	public List<Impedimento> list() {
 		Query query = entityManager.createNamedQuery("findAll");
 		return query.getResultList();
 	}
 
 	@Override
-	public List<ProductBacklog> pageList() {
+	public List<Impedimento> pageList() {
 		return null;
 	}
 	
