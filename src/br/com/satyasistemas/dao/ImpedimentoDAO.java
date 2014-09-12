@@ -43,7 +43,7 @@ public class ImpedimentoDAO implements DAO<Impedimento>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Impedimento> list() {
-		Query query = entityManager.createNamedQuery("findAll");
+		Query query = entityManager.createNamedQuery("findAllImpedimento");
 		return query.getResultList();
 	}
 
