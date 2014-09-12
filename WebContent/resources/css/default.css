@@ -5,6 +5,18 @@ list-style:none;
 vertical-align:baseline;
 }
 
+.header-title {
+	color: white;
+}
+
 .ui-widget, .ui-widget .ui-widget {
     font-size: 90%;
+}
+
+#header {
+	border:none;
+}
+
+#header > .ui-layout-unit-content {
+	padding: 0 !important;
 }
