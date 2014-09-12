@@ -13,8 +13,7 @@
 		<ui:define name="content">
 			<p:panel>
 				<h:form id="regItem">
-					<p:messages id="messages" showDetail="true" autoUpdate="true"
-						closable="true" />
+					<p:growl id="regMsgs" showDetail="true" />
 					<p:fieldset legend="Cadastro Itens Backlog" toggleable="true">
 						<p:panelGrid>
 							<p:row>
@@ -66,16 +65,31 @@
 				<br />
 				<br />
 				<h:form id="listItems">
+					<p:growl id="listMsgs" showDetail="true" />
+
 					<p:dataTable value="#{backlogBean.itensBacklog}" var="backlog"
-						rows="10" paginator="true"
+						rows="10" paginator="true" editable="true" editMode="cell"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="5,10,15">
+
+						<p:ajax event="cellEdit" listener="#{backlogBean.onCellEdit(backlog)}"
+							update=":listItems:listMsgs" />
 
 						<p:column style="width:32px">
 							<h:selectBooleanCheckbox />
 						</p:column>
 						<p:column headerText="Id">
 							<h:outputText value="#{backlog.id}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{backlog.nome}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nome" value="#{backlog.nome}" />
+								</f:facet>
+							</p:cellEditor>
 						</p:column>
 
 						<p:column headerText="Importância">

@@ -82,4 +82,12 @@ public class ProductBacklog implements Serializable{
 		this.solicitante = solicitante;
 	}
 
+	@Override
+	public String toString() {
+		return "ProductBacklog [id=" + id + ", nome=" + nome + ", importancia="
+				+ importancia + ", estimativa=" + estimativa
+				+ ", demonstracao=" + demonstracao + ", notas=" + notas
+				+ ", solicitante=" + solicitante + "]";
+	}
+	
 }

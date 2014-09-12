@@ -10,6 +10,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionListener;
 
+import org.primefaces.event.CellEditEvent;
+
 import br.com.satyasistemas.dao.ProductBacklogDAO;
 import br.com.satyasistemas.dao.entity.ProductBacklog;
 
@@ -59,7 +61,12 @@ public class BacklogBean implements Serializable {
 							"Dados inválidos, favor verificar os campos"));
 		} else {
 			backlogDAO.save(productBacklog);
-			productBacklog= new ProductBacklog();
+			productBacklog = new ProductBacklog();
 		}
+	}
+
+	public void onCellEdit(ProductBacklog backlog) {
+		System.out.println(backlog);
+		backlogDAO.save(backlog);
 	}
 }

@@ -24,7 +24,12 @@ public class ProductBacklogDAO implements DAO<ProductBacklog>, Serializable{
 	@Override
 	public void save(ProductBacklog backlog) {
 		beginTransaction();
-		entityManager.persist(backlog);
+		if(backlog.getId() > 0){
+			entityManager.merge(backlog);
+		}else{
+			entityManager.persist(backlog);
+		}
+		
 		closeTransaction();
 	}
 
