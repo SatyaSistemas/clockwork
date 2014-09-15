@@ -62,10 +62,15 @@
 				<br />
 				<br />
 				<h:form id="listItems">
+					<p:growl id="listMsgs" showDetail="true" />
 					<p:dataTable value="#{sprintBean.sprints}" var="sprint" rows="10"
 						paginator="true" editable="true" editMode="cell"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="5,10,15">
+						
+						<p:ajax event="cellEdit"
+							listener="#{sprintBean.onCellEdit(sprint)}"
+							update=":listItems:listMsgs" />
 
 						<p:column headerText="Id">
 							<h:outputText value="#{sprint.id}" />
@@ -106,7 +111,7 @@
 									<h:outputText value="#{sprint.termino}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText id="inicio" value="#{sprint.termino}" />
+									<p:inputText id="termino" value="#{sprint.termino}" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
@@ -116,7 +121,7 @@
 									<h:outputText value="#{sprint.tamanho}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText id="inicio" value="#{sprint.tamanho}" />
+									<p:inputText id="tamanho" value="#{sprint.tamanho}" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
@@ -126,7 +131,7 @@
 									<h:outputText value="#{sprint.tamanhoRealizado}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText id="inicio" value="#{sprint.tamanhoRealizado}" />
+									<p:inputText id="realizado" value="#{sprint.tamanhoRealizado}" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
