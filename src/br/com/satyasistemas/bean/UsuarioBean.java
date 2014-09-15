@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.satyasistemas.dao.UsuarioDAO;
 import br.com.satyasistemas.dao.entity.Usuario;
 
 @ManagedBean(name = "usuarioBean")
+@ViewScoped
 public class UsuarioBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,6 +25,12 @@ public class UsuarioBean implements Serializable {
 		usuarios = new ArrayList<Usuario>();
 		usuarioDao = new UsuarioDAO();
 		usuario = new Usuario();
+	}
+
+	public void deleteUsuario() {
+		System.out.println("teste");
+		System.out.println(this.usuario);
+		usuarioDao.delete(this.usuario);
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -42,8 +50,7 @@ public class UsuarioBean implements Serializable {
 	}
 
 	public void addUser() {
-		if (usuario.getNome() == null
-				|| usuario.getNome().equals("")) {
+		if (usuario.getNome() == null || usuario.getNome().equals("")) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,

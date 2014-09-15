@@ -143,6 +143,10 @@
 						<p:column headerText="Visualizar">
 							<p:commandButton value="Modal" type="button"
 								onclick="PF('dlgSprint').show();" />
+							<p:commandButton value="Deletar" onclick="PF('delDlg').show();">
+								<f:setPropertyActionListener value="#{sprint}"
+									target="#{sprintBean.sprint}" />
+							</p:commandButton>
 						</p:column>
 					</p:dataTable>
 					<p:dialog header="Modal Dialog" widgetVar="dlgSprint" height="100">
@@ -156,6 +160,19 @@
 						</p:tabMenu>
 					</p:dialog>
 				</h:form>
+				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
+					header="Tela de confirmação" appendTo="@(body)"
+					message="Tem certeza que em deletar esse item?" widgetVar="delDlg">
+					<h:form id="deleteForm">
+						<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
+							icon="ui-icon-check" update=":listItems" value="Sim"
+							oncomplete="PF('delDlg').hide()"
+							action="#{sprintBean.deleteSprint}" />
+						<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
+							icon="ui-icon-close" value="Não" onclick="PF('delDlg').hide()" />
+					</h:form>
+				</p:confirmDialog>
+
 			</p:panel>
 		</ui:define>
 	</ui:composition>

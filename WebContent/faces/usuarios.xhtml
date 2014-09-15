@@ -58,8 +58,26 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
+						<p:column headerText="Ações">
+							<p:commandButton value="Deletar" onclick="PF('delDlg').show();">
+								<f:setPropertyActionListener value="#{usuario}"
+									target="#{usuarioBean.usuario}" />
+							</p:commandButton>
+						</p:column>
 					</p:dataTable>
 				</h:form>
+				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
+					header="Tela de confirmação" appendTo="@(body)"
+					message="Tem certeza que em deletar esse item?" widgetVar="delDlg">
+					<h:form id="deleteForm">
+						<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
+							icon="ui-icon-check" update=":listUsers" value="Sim"
+							oncomplete="PF('delDlg').hide()"
+							action="#{usuarioBean.deleteUsuario}" />
+						<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
+							icon="ui-icon-close" value="Não" onclick="PF('delDlg').hide()" />
+					</h:form>
+				</p:confirmDialog>
 			</p:panel>
 		</ui:define>
 	</ui:composition>

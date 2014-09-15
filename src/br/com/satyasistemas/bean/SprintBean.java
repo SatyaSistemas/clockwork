@@ -39,6 +39,10 @@ public class SprintBean implements Serializable {
 	public void onCellEdit(Sprint sprint) {
 		sprintDAO.save(sprint);
 	}
+	
+	public void deleteSprint(){
+		sprintDAO.delete(this.sprint);
+	}
 
 	public List<Sprint> getSprints() {
 		return sprintDAO.list();

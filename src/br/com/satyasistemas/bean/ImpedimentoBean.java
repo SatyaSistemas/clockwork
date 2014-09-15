@@ -40,6 +40,10 @@ public class ImpedimentoBean implements Serializable {
 		this.impedimento = new Impedimento();
 	}
 
+	public void deleteImpedimento() {
+		impedimentoDAO.delete(this.impedimento);
+	}
+
 	public void onCellEdit(Impedimento impedimentos) {
 		impedimentoDAO.save(impedimentos);
 	}

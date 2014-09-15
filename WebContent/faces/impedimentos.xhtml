@@ -158,7 +158,7 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="observacao">
+						<p:column headerText="Observacao">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{impedimento.observacao}" />
@@ -168,8 +168,26 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
+						<p:column headerText="Ações">
+							<p:commandButton value="Deletar" onclick="PF('delDlg').show();">
+								<f:setPropertyActionListener value="#{impedimento}"
+									target="#{impedimentoBean.impedimento}" />
+							</p:commandButton>
+						</p:column>
 					</p:dataTable>
 				</h:form>
+				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
+					header="Tela de confirmação" appendTo="@(body)"
+					message="Tem certeza que em deletar esse item?" widgetVar="delDlg">
+					<h:form id="deleteForm">
+						<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
+							icon="ui-icon-check" update=":listImp" value="Sim"
+							oncomplete="PF('delDlg').hide()"
+							action="#{impedimentoBean.deleteImpedimento}" />
+						<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
+							icon="ui-icon-close" value="Não" onclick="PF('delDlg').hide()" />
+					</h:form>
+				</p:confirmDialog>
 			</p:panel>
 		</ui:define>
 	</ui:composition>

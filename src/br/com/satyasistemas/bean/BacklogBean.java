@@ -70,6 +70,11 @@ public class BacklogBean implements Serializable {
 		backlogDAO.save(backlog);
 	}
 	
+	public void deleteBacklogItem(){
+		System.out.println(this.productBacklog);
+		backlogDAO.delete(this.productBacklog);
+	}
+	
 	public List<Usuario> getUsuarios(){
 		return usuarioDAO.list();
 	}
