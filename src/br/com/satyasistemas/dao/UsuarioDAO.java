@@ -48,7 +48,7 @@ public class UsuarioDAO implements DAO<Usuario>,Serializable{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> list() {
-		Query query = entityManager.createNamedQuery("findAllUsuario");
+		Query query = entityManager.createNamedQuery("Usuario.findAll");
 		return query.getResultList();
 	}
 

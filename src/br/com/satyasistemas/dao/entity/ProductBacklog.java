@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "product_backlog")
-@NamedQuery(name = "findAllBacklog", query = "select pb from ProductBacklog pb")
+@NamedQuery(name = "ProductBacklog.findAll", query = "select pb from ProductBacklog pb")
 public class ProductBacklog implements Serializable{
 	/**
 	 * 

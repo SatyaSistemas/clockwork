@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "usuario")
-@NamedQuery(name = "findAllUsuario", query = "select i from Usuario i")
+@NamedQuery(name = "Usuario.findAll", query = "select i from Usuario i")
 public class Usuario implements Serializable {
 
 	/**

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="item")
-@NamedQuery(name = "findAllItem", query = "select i from Impedimento i")
+@NamedQuery(name = "Item.findAll", query = "select i from Impedimento i")
 public class Item implements Serializable{
 	/**
 	 * 

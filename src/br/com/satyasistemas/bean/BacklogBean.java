@@ -67,7 +67,6 @@ public class BacklogBean implements Serializable {
 	}
 
 	public void onCellEdit(ProductBacklog backlog) {
-		System.out.println(backlog);
 		backlogDAO.save(backlog);
 	}
 	

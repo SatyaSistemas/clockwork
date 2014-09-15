@@ -3,16 +3,17 @@ package br.com.satyasistemas.dao.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "impedimentos")
-@NamedQuery(name = "findAllImpedimento", query = "select i from Impedimento i")
+@NamedQuery(name = "Impedimento.findAll", query = "select i from Impedimento i")
 public class Impedimento implements Serializable {
 
 	/**
@@ -24,16 +25,12 @@ public class Impedimento implements Serializable {
 	private int id;
 	
 	private String impedimento;
-	
-	@Column(name = "responsavel_por")
-	private String responsavelPor;
-	
+	private String reportado;
 	private String responsavel;
 	
-	@Column(name = "data_criacao")
+	@Temporal(TemporalType.DATE)
 	private Date criacao;
-	
-	@Column(name = "data_final")
+	@Temporal(TemporalType.DATE)
 	private Date finalizacao;
 	
 	private String observacao;
@@ -54,12 +51,12 @@ public class Impedimento implements Serializable {
 		this.impedimento = impedimento;
 	}
 
-	public String getResponsavelPor() {
-		return responsavelPor;
+	public String getReportado() {
+		return reportado;
 	}
 
-	public void setResponsavelPor(String responsavelPor) {
-		this.responsavelPor = responsavelPor;
+	public void setReportado(String reportado) {
+		this.reportado = reportado;
 	}
 
 	public String getResponsavel() {

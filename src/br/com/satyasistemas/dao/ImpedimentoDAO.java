@@ -1,5 +1,6 @@
 package br.com.satyasistemas.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,8 +8,12 @@ import javax.persistence.Query;
 
 import br.com.satyasistemas.dao.entity.Impedimento;
 
-public class ImpedimentoDAO implements DAO<Impedimento>{
+public class ImpedimentoDAO implements DAO<Impedimento>,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EntityManager entityManager;
 	
 	public ImpedimentoDAO() {
@@ -43,7 +48,7 @@ public class ImpedimentoDAO implements DAO<Impedimento>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Impedimento> list() {
-		Query query = entityManager.createNamedQuery("findAllImpedimento");
+		Query query = entityManager.createNamedQuery("Impedimento.findAll");
 		return query.getResultList();
 	}
 

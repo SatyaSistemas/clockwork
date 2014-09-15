@@ -43,7 +43,7 @@ public class ItemDAO implements DAO<Item>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Item> list() {
-		Query query = entityManager.createNamedQuery("findAllImpedimento");
+		Query query = entityManager.createNamedQuery("Item.findAll");
 		return query.getResultList();
 	}
 

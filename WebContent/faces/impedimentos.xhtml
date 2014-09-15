@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/faces/templates/layout.xhtml">
+		<ui:define name="rightPanel"></ui:define>
+		<ui:define name="leftPanel"></ui:define>
+		<ui:define name="content">
+			<p:panel>
+				<h:form id="regImp">
+					<p:fieldset legend="Cadastro de Impedimentos" toggleable="true">
+						<p:panelGrid>
+							<p:row>
+								<p:column>
+									<p:outputLabel value="Nome:" />
+									<br />
+									<p:inputText id="nome"
+										value="#{impedimentoBean.impedimento.impedimento}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Reportado por:" />
+									<br />
+									<p:selectOneMenu id="reportado"
+										value="#{impedimentoBean.impedimento.reportado}">
+										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{impedimentoBean.usuarios}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Responsável:" />
+									<br />
+									<p:selectOneMenu id="responsavel"
+										value="#{impedimentoBean.impedimento.responsavel}">
+										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{impedimentoBean.usuarios}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Criação" />
+									<br />
+									<p:calendar id="inicio" pattern="dd-MM-yyyy"
+										value="#{impedimentoBean.impedimento.criacao}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Finalização" />
+									<br />
+									<p:calendar id="finalizacao" pattern="dd-MM-yyyy"
+										value="#{impedimentoBean.impedimento.finalizacao}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Observações:" />
+									<br />
+									<p:inputText id="observacao"
+										value="#{impedimentoBean.impedimento.observacao}" />
+								</p:column>
+
+								<p:column>
+									<p:commandButton id="add" value="Salvar"
+										update=":regImp,:listImp"
+										actionListener="#{impedimentoBean.addImpedimento}"
+										icon="ui-icon-check" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:fieldset>
+				</h:form>
+				<br />
+				<br />
+				<h:form id="listImp">
+					<p:dataTable value="#{impedimentoBean.impedimentos}"
+						var="impedimento" rows="10" paginator="true" editable="true"
+						editMode="cell"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+						<p:column style="width:32px">
+							<h:selectBooleanCheckbox />
+						</p:column>
+						<p:column headerText="Id">
+							<h:outputText value="#{impedimento.id}" />
+						</p:column>
+
+						<p:column headerText="Nome">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{impedimento.impedimento}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nome" value="#{impedimento.impedimento}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Reportado Por">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{impedimento.reportado}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneMenu id="usuarioReport"
+										value="#{impedimentoBean.impedimento.reportado}">
+										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{impedimentoBean.usuarios}" />
+									</p:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Responsavel">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{impedimento.reportado}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneMenu id="responsavel"
+										value="#{impedimentoBean.impedimento.responsavel}">
+										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{impedimentoBean.usuarios}" />
+									</p:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Data Criação">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{impedimento.criacao}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:calendar id="criacao" pattern="dd-MM-yyyy"
+										value="#{impedimento.criacao}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Data Finalização">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{impedimento.finalizacao}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:calendar id="finalizacao" pattern="dd-MM-yyyy"
+										value="#{impedimento.finalizacao}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="observacao">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{impedimento.observacao}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="observacao" value="#{impedimento.observacao}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -7,6 +7,11 @@
 		<view-id value="/faces/backlog.xhtml" />
 	</url-mapping>
 
+	<url-mapping id="impedimentos">
+		<pattern value="/impedimentos" />
+		<view-id value="/faces/impedimentos.xhtml" />
+	</url-mapping>
+
 	<url-mapping id="sprints">
 		<pattern value="/sprints" />
 		<view-id value="/faces/sprints.xhtml" />

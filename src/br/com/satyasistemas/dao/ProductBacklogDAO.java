@@ -48,7 +48,7 @@ public class ProductBacklogDAO implements DAO<ProductBacklog>, Serializable{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ProductBacklog> list() {
-		Query query = entityManager.createNamedQuery("findAllBacklog");
+		Query query = entityManager.createNamedQuery("ProductBacklog.findAll");
 		return query.getResultList();
 	}
 

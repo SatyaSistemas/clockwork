@@ -12,14 +12,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 /**
  * The persistent class for the sprint database table.
  * 
  */
 @Entity
-@Table(name="sprint")
-@NamedQuery(name="Sprint.findAll", query="SELECT s FROM Sprint s")
+@Table(name = "sprint")
+@NamedQuery(name = "Sprint.findAll", query = "SELECT s FROM Sprint s")
 public class Sprint implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,7 +26,7 @@ public class Sprint implements Serializable {
 	@GeneratedValue
 	private int id;
 
-	@Column(name="definicao_pronto")
+	@Column(name = "definicao_pronto")
 	private String definicaoPronto;
 
 	@Temporal(TemporalType.DATE)
@@ -37,12 +36,12 @@ public class Sprint implements Serializable {
 
 	private int tamanho;
 
-	@Column(name="tamanho_realizado")
+	@Column(name = "tamanho_realizado")
 	private int tamanhoRealizado;
 
 	@Temporal(TemporalType.DATE)
 	private Date termino;
-	
+
 	public int getId() {
 		return this.id;
 	}

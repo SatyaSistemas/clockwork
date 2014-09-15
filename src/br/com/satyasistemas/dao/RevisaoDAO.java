@@ -43,7 +43,7 @@ public class RevisaoDAO implements DAO<Revisao>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Revisao> list() {
-		Query query = entityManager.createNamedQuery("findAllUsuario");
+		Query query = entityManager.createNamedQuery("Revisao.findAll");
 		return query.getResultList();
 	}
 

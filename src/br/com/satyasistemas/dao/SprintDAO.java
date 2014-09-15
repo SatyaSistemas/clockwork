@@ -1,5 +1,6 @@
 package br.com.satyasistemas.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,8 +8,12 @@ import javax.persistence.Query;
 
 import br.com.satyasistemas.dao.entity.Sprint;
 
-public class SprintDAO implements DAO<Sprint>{
+public class SprintDAO implements DAO<Sprint>, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EntityManager entityManager;
 	
 	public SprintDAO() {
@@ -43,7 +48,7 @@ public class SprintDAO implements DAO<Sprint>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Sprint> list() {
-		Query query = entityManager.createNamedQuery("findAllUsuario");
+		Query query = entityManager.createNamedQuery("Sprint.findAll");
 		return query.getResultList();
 	}
 

@@ -25,8 +25,7 @@ public class Revisao implements Serializable {
 	@JoinColumn(name="fk_sprint")
 	private Sprint sprint;
 
-	public Revisao() {
-	}
+	public Revisao() {}
 
 	public int getId() {
 		return this.id;
