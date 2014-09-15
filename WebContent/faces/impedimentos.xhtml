@@ -135,7 +135,9 @@
 						<p:column headerText="Data Criação">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{impedimento.criacao}" />
+									<h:outputText value="#{impedimento.criacao}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
 								</f:facet>
 								<f:facet name="input">
 									<p:calendar id="criacao" pattern="dd-MM-yyyy"
@@ -146,7 +148,9 @@
 						<p:column headerText="Data Finalização">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{impedimento.finalizacao}" />
+									<h:outputText value="#{impedimento.finalizacao}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
 								</f:facet>
 								<f:facet name="input">
 									<p:calendar id="finalizacao" pattern="dd-MM-yyyy"
