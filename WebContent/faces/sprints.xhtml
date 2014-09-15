@@ -130,7 +130,22 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
+
+						<p:column headerText="Visualizar">
+							<p:commandButton value="Modal" type="button"
+								onclick="PF('dlgSprint').show();" />
+						</p:column>
 					</p:dataTable>
+					<p:dialog header="Modal Dialog" widgetVar="dlgSprint" height="100">
+						<p:tabMenu activeIndex="#{param.i}">
+							<p:menuitem value="Itens Sprint" icon="ui-icon-star">
+								<f:param name="i" value="0" />
+							</p:menuitem>
+							<p:menuitem value="Impedimentos">
+								<f:param name="i" value="1" />
+							</p:menuitem>
+						</p:tabMenu>
+					</p:dialog>
 				</h:form>
 			</p:panel>
 		</ui:define>
