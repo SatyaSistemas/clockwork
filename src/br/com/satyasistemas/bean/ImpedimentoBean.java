@@ -27,7 +27,7 @@ public class ImpedimentoBean implements Serializable {
 
 	public ImpedimentoBean() {
 		impedimentoDAO = new ImpedimentoDAO();
-		usuarioDAO = new UsuarioDAO(); 
+		usuarioDAO = new UsuarioDAO();
 		impedimentos = new ArrayList<Impedimento>();
 		impedimento = new Impedimento();
 	}
@@ -38,6 +38,10 @@ public class ImpedimentoBean implements Serializable {
 	public void addImpedimento() {
 		impedimentoDAO.save(impedimento);
 		this.impedimento = new Impedimento();
+	}
+
+	public void onCellEdit(Impedimento impedimentos) {
+		impedimentoDAO.save(impedimentos);
 	}
 
 	public List<Usuario> getUsuarios() {

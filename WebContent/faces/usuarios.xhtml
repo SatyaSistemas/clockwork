@@ -23,7 +23,8 @@
 								</p:column>
 
 								<p:column>
-									<p:commandButton id="add" value="Salvar" update=":listUsers,:regUser"
+									<p:commandButton id="add" value="Salvar"
+										update=":listUsers,:regUser"
 										actionListener="#{usuarioBean.addUser}" icon="ui-icon-check" />
 								</p:column>
 							</p:row>
@@ -33,14 +34,20 @@
 				<br />
 				<br />
 				<h:form id="listUsers">
-					<p:dataTable value="#{usuarioBean.usuarios}" var="usuario">
-						<p:column style="width:32px">
-							<h:selectBooleanCheckbox />
-						</p:column>
-						<p:column headerText="Id">
-							<h:outputText value="#{usuario.nome}" />
-						</p:column>
+					<p:growl id="listMsgs" showDetail="true" />
 
+					<p:dataTable value="#{usuarioBean.usuarios}" var="usuario"
+						rows="10" paginator="true" editable="true" editMode="cell"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+
+						<p:ajax event="cellEdit"
+							listener="#{usuarioBean.onCellEdit(usuario)}"
+							update=":listUsers:listMsgs" />
+
+						<p:column style="width:32px">
+							<h:outputText value="#{usuario.id}" />
+						</p:column>
 						<p:column headerText="Usuário">
 							<p:cellEditor>
 								<f:facet name="output">

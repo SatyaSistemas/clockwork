@@ -74,11 +74,17 @@
 				<br />
 				<br />
 				<h:form id="listImp">
+					<p:growl id="listMsgs" showDetail="true" />
 					<p:dataTable value="#{impedimentoBean.impedimentos}"
 						var="impedimento" rows="10" paginator="true" editable="true"
 						editMode="cell"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="5,10,15">
+
+						<p:ajax event="cellEdit"
+							listener="#{impedimentoBean.onCellEdit(impedimento)}"
+							update=":listImp:listMsgs" />
+
 						<p:column style="width:32px">
 							<h:selectBooleanCheckbox />
 						</p:column>
@@ -103,7 +109,7 @@
 								</f:facet>
 								<f:facet name="input">
 									<p:selectOneMenu id="usuarioReport"
-										value="#{impedimentoBean.impedimento.reportado}">
+										value="#{impedimento.reportado}">
 										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
 											noSelectionOption="true" />
 										<f:selectItems value="#{impedimentoBean.usuarios}" />
@@ -114,11 +120,11 @@
 						<p:column headerText="Responsavel">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{impedimento.reportado}" />
+									<h:outputText value="#{impedimento.responsavel}" />
 								</f:facet>
 								<f:facet name="input">
 									<p:selectOneMenu id="responsavel"
-										value="#{impedimentoBean.impedimento.responsavel}">
+										value="#{impedimento.responsavel}">
 										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
 											noSelectionOption="true" />
 										<f:selectItems value="#{impedimentoBean.usuarios}" />
