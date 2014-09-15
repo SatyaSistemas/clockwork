@@ -1,4 +1,4 @@
-package br.com.satyasistemas.controller;
+package br.com.satyasistemas.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -56,7 +56,7 @@
 										value="#{backlogBean.productBacklog.notas}" />
 								</p:column>
 								<p:column>
-									<p:commandButton id="add" value="Salvar" update=":listItems"
+									<p:commandButton id="add" value="Salvar" update=":listItems, :regItem"
 										actionListener="#{backlogBean.addBacklogItem}"
 										icon="ui-icon-check" />
 								</p:column>
