@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 import br.com.satyasistemas.dao.SprintDAO;
 import br.com.satyasistemas.dao.entity.Sprint;
 
-@ManagedBean(name="sprintBean")
+@ManagedBean(name = "sprintBean")
 @ViewScoped
 public class SprintBean implements Serializable {
 
@@ -21,6 +21,7 @@ public class SprintBean implements Serializable {
 	private SprintDAO sprintDAO;
 	private List<Sprint> sprints;
 	private Sprint sprint;
+	private int sprintID;
 
 	public SprintBean() {
 		this.sprintDAO = new SprintDAO();
@@ -39,8 +40,8 @@ public class SprintBean implements Serializable {
 	public void onCellEdit(Sprint sprint) {
 		sprintDAO.save(sprint);
 	}
-	
-	public void deleteSprint(){
+
+	public void deleteSprint() {
 		sprintDAO.delete(this.sprint);
 	}
 
@@ -59,9 +60,17 @@ public class SprintBean implements Serializable {
 	public void setSprint(Sprint sprint) {
 		this.sprint = sprint;
 	}
-	
-	public String goSprintDetail(){
+
+	public String goSprintDetail() {
 		return "pretty:sprintDetail";
+	}
+
+	public int getSprintID() {
+		return sprintID;
+	}
+
+	public void setSprintID(int sprintID) {
+		this.sprintID = sprintID;
 	}
 
 }

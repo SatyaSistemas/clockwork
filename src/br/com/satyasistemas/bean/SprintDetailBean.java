@@ -3,9 +3,12 @@ package br.com.satyasistemas.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.satyasistemas.dao.ItemSprintDAO;
 import br.com.satyasistemas.dao.entity.ItemSprint;
@@ -21,11 +24,22 @@ public class SprintDetailBean implements Serializable {
 	private ItemSprintDAO itemSprintDAO;
 	private List<ItemSprint> itens;
 	private ItemSprint item;
-	
-	public SprintDetailBean(){
+	private int sprintId;
+
+	public SprintDetailBean() {
 		this.itemSprintDAO = new ItemSprintDAO();
 		itens = new ArrayList<ItemSprint>();
 		item = new ItemSprint();
+	}
+	
+	@PostConstruct
+	public void init(){
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		sprintId = Integer.valueOf(params.get("sprintID"));
+	}
+	
+	public void addItemSprint(){
+		this.itemSprintDAO.save(item);
 	}
 
 	public List<ItemSprint> getItens() {
@@ -44,4 +58,11 @@ public class SprintDetailBean implements Serializable {
 		this.item = item;
 	}
 
+	public int getSprintId() {
+		return sprintId;
+	}
+
+	public void setSprintId(int sprintId) {
+		this.sprintId = sprintId;
+	}
 }

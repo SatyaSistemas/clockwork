@@ -13,40 +13,42 @@
 		<ui:define name="content">
 			<p:panel>
 				<h:form>
+				<p:outputLabel/>
 					<p:accordionPanel>
 						<p:tab title="Itens">
+						<h:outputLabel value="#{sprintDetailBean.sprintId}"/>
 							<p:fieldset legend="Cadastro de item da Sprint" toggleable="true">
 								<p:panelGrid>
 									<p:row>
 										<p:column>
 											<p:outputLabel value="Dependente:" />
 											<br />
-											<p:inputText id="dependente" />
+											<p:inputText id="dependente" value="#{sprintDetailBean.item.dependente}"/>
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Nome:" />
 											<br />
-											<p:inputText id="nome" value="#{null}" />
+											<p:inputText id="nome" value="#{sprintDetailBean.item.nome}" />
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Horas Planejadas:" />
 											<br />
-											<p:inputText id="horPlanejadas" value="#{null}" />
+											<p:inputText id="horPlanejadas" value="#{sprintDetailBean.item.horasPlanejadas}" />
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Horas Realizadas:" />
 											<br />
-											<p:inputText id="horRealizadas" value="#{null}" />
+											<p:inputText id="horRealizadas" value="#{sprintDetailBean.item.horasRealizadas}" />
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Prioridade:" />
 											<br />
-											<p:inputText id="prioridade" value="#{null}" />
+											<p:inputText id="prioridade" value="#{sprintDetailBean.item.prioridade}" />
 										</p:column>
 										<p:column>
-											<p:outputLabel value="Solicitante:" />
+											<p:outputLabel value="Responsável:" />
 											<br />
-											<p:selectOneMenu id="usuario">
+											<p:selectOneMenu id="usuario" value="#{sprintDetailBean.item.responsavel}">
 												<f:selectItem itemLabel="Selecione o responsável"
 													itemValue="" noSelectionOption="true" />
 												<f:selectItems />
@@ -55,7 +57,7 @@
 										<p:column>
 											<p:outputLabel value="Situação" />
 											<br />
-											<p:selectOneMenu id="situação">
+											<p:selectOneMenu id="situação" value="#{sprintDetailBean.item.situacao}">
 												<f:selectItem itemLabel="Selecione a situação" itemValue=""
 													noSelectionOption="true" />
 
@@ -69,7 +71,7 @@
 										<p:column>
 											<p:outputLabel value="Observações:" />
 											<br />
-											<p:inputText id="observacoes" value="#{null}" />
+											<p:inputText id="observacoes" value="#{sprintDetailBean.item.observacoes}" />
 										</p:column>
 										<p:column>
 											<p:commandButton id="addItemSprint" value="Salvar"

@@ -149,7 +149,9 @@
 							</p:commandButton>
 
 							<p:commandLink action="#{sprintBean.goSprintDetail}"
-								ajax="false" value="Detalhes" />
+								type="submit" ajax="false" value="Detalhes">
+								<f:setPropertyActionListener target="#{sprintBean.sprint}" value="#{sprint}"></f:setPropertyActionListener>
+							</p:commandLink>
 						</p:column>
 					</p:dataTable>
 				</h:form>

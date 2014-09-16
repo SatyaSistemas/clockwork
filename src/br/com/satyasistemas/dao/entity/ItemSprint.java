@@ -5,13 +5,17 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="item")
-@NamedQuery(name = "Item.findAll", query = "select i from Impedimento i")
-public class ItemSprint implements Serializable{
+@Table(name = "item_sprint")
+@NamedQueries({
+		@NamedQuery(name = "ItemSprint.findAll", query = "select i from ItemSprint i"),
+		@NamedQuery(name = "ItemSprint.findAllBySprintID", query = "select i from ItemSprint i where i.sprint = :sprintID") })
+public class ItemSprint implements Serializable {
 	/**
 	 * 
 	 */
@@ -19,7 +23,7 @@ public class ItemSprint implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id;
-	
+
 	private byte dependente;
 	private int horasPlanejadas;
 	private int horasRealizadas;
@@ -29,10 +33,11 @@ public class ItemSprint implements Serializable{
 	private String responsavel;
 	private String situacao;
 
-//	@JoinColumn(name="fk_sprint")
-//	private Sprint sprint;
+	@JoinColumn(name = "fk_sprint")
+	private int sprint;
 
-	public ItemSprint() {}
+	public ItemSprint() {
+	}
 
 	public int getId() {
 		return this.id;
@@ -106,11 +111,12 @@ public class ItemSprint implements Serializable{
 		this.situacao = situacao;
 	}
 
-//	public Sprint getSprint() {
-//		return this.sprint;
-//	}
-//
-//	public void setSprint(Sprint sprint) {
-//		this.sprint = sprint;
-//	}
+	public int getSprint() {
+		return sprint;
+	}
+
+	public void setSprint(int sprint) {
+		this.sprint = sprint;
+	}
+
 }
