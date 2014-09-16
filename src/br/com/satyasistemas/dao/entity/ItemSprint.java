@@ -24,7 +24,7 @@ public class ItemSprint implements Serializable {
 	@GeneratedValue
 	private int id;
 
-	private byte dependente;
+	private boolean dependente;
 	private int horasPlanejadas;
 	private int horasRealizadas;
 	private String nome;
@@ -36,9 +36,6 @@ public class ItemSprint implements Serializable {
 	@JoinColumn(name = "fk_sprint")
 	private int sprint;
 
-	public ItemSprint() {
-	}
-
 	public int getId() {
 		return this.id;
 	}
@@ -47,11 +44,11 @@ public class ItemSprint implements Serializable {
 		this.id = id;
 	}
 
-	public byte getDependente() {
+	public boolean getDependente() {
 		return this.dependente;
 	}
 
-	public void setDependente(byte dependente) {
+	public void setDependente(boolean dependente) {
 		this.dependente = dependente;
 	}
 

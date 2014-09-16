@@ -10,7 +10,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="revisao")
-@NamedQuery(name="Revisao.findAll", query="SELECT r FROM Revisao r")
+@NamedQueries({
+@NamedQuery(name="Revisao.findAll", query="SELECT r FROM Revisao r"),
+@NamedQuery(name="Revisao.findAllBySprintID", query="SELECT r FROM Revisao r where r.sprint = :sprintID")
+})
 public class Revisao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +26,7 @@ public class Revisao implements Serializable {
 	private String tipo;
 
 	@JoinColumn(name="fk_sprint")
-	private Sprint sprint;
+	private int sprint;
 
 	public Revisao() {}
 
@@ -51,11 +54,11 @@ public class Revisao implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public Sprint getSprint() {
+	public int getSprint() {
 		return this.sprint;
 	}
 
-	public void setSprint(Sprint sprint) {
+	public void setSprint(int sprint) {
 		this.sprint = sprint;
 	}
 

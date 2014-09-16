@@ -12,18 +12,17 @@
 		<ui:define name="leftPanel"></ui:define>
 		<ui:define name="content">
 			<p:panel>
-				<h:form>
-				<p:outputLabel/>
-					<p:accordionPanel>
-						<p:tab title="Itens">
-						<h:outputLabel value="#{sprintDetailBean.sprintId}"/>
+				<p:accordionPanel>
+					<p:tab title="Itens">
+						<h:form id="regItems">
 							<p:fieldset legend="Cadastro de item da Sprint" toggleable="true">
 								<p:panelGrid>
 									<p:row>
 										<p:column>
 											<p:outputLabel value="Dependente:" />
 											<br />
-											<p:inputText id="dependente" value="#{sprintDetailBean.item.dependente}"/>
+											<p:selectBooleanCheckbox id="dependente"
+												value="#{sprintDetailBean.item.dependente}" />
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Nome:" />
@@ -33,31 +32,36 @@
 										<p:column>
 											<p:outputLabel value="Horas Planejadas:" />
 											<br />
-											<p:inputText id="horPlanejadas" value="#{sprintDetailBean.item.horasPlanejadas}" />
+											<p:inputText id="horPlanejadas"
+												value="#{sprintDetailBean.item.horasPlanejadas}" />
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Horas Realizadas:" />
 											<br />
-											<p:inputText id="horRealizadas" value="#{sprintDetailBean.item.horasRealizadas}" />
+											<p:inputText id="horRealizadas"
+												value="#{sprintDetailBean.item.horasRealizadas}" />
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Prioridade:" />
 											<br />
-											<p:inputText id="prioridade" value="#{sprintDetailBean.item.prioridade}" />
+											<p:inputText id="prioridade"
+												value="#{sprintDetailBean.item.prioridade}" />
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Responsável:" />
 											<br />
-											<p:selectOneMenu id="usuario" value="#{sprintDetailBean.item.responsavel}">
+											<p:selectOneMenu id="usuario"
+												value="#{sprintDetailBean.item.responsavel}">
 												<f:selectItem itemLabel="Selecione o responsável"
 													itemValue="" noSelectionOption="true" />
-												<f:selectItems />
+												<f:selectItems value="#{backlogBean.usuarios}" />
 											</p:selectOneMenu>
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Situação" />
 											<br />
-											<p:selectOneMenu id="situação" value="#{sprintDetailBean.item.situacao}">
+											<p:selectOneMenu id="situação"
+												value="#{sprintDetailBean.item.situacao}">
 												<f:selectItem itemLabel="Selecione a situação" itemValue=""
 													noSelectionOption="true" />
 
@@ -71,25 +75,135 @@
 										<p:column>
 											<p:outputLabel value="Observações:" />
 											<br />
-											<p:inputText id="observacoes" value="#{sprintDetailBean.item.observacoes}" />
+											<p:inputText id="observacoes"
+												value="#{sprintDetailBean.item.observacoes}" />
 										</p:column>
 										<p:column>
 											<p:commandButton id="addItemSprint" value="Salvar"
+												update="@form" action="#{sprintDetailBean.addItemSprint}"
 												icon="ui-icon-check" />
 										</p:column>
 									</p:row>
 								</p:panelGrid>
 							</p:fieldset>
+							<p:growl id="listMsgs" showDetail="true" />
 							<h:panelGrid columns="2" cellpadding="10">
-								<p:dataTable value="#{itemSprintBean.itens}" var="sprint"
-									rows="10" paginator="true" editable="true" editMode="cell"
+								<p:dataTable id="itemsTable" value="#{sprintDetailBean.itens}"
+									var="sprintItem" rows="10" paginator="true" editable="true"
+									editMode="cell"
 									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 									rowsPerPageTemplate="5,10,15">
 
+									<p:ajax event="cellEdit"
+										listener="#{sprintDetailBean.onCellEdit(sprintItem)}"
+										update="@this" />
+
+									<p:column headerText="Dependente">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{sprintItem.dependente}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="dependente"
+													value="#{sprintItem.dependente}" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Nome">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{sprintItem.nome}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="nome" value="#{sprintItem.nome}" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Horas Planejadas:">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{sprintItem.horasPlanejadas}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="horPlanejadas"
+													value="#{sprintItem.horasPlanejadas}" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Horas Realizadas">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{sprintItem.horasPlanejadas}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="horRealizadas"
+													value="#{sprintItem.horasRealizadas}" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Prioridade">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{sprintItem.prioridade}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="prioridade"
+													value="#{sprintItem.prioridade}" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Responsável">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{sprintItem.prioridade}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:selectOneMenu id="usuario"
+													value="#{sprintItem.responsavel}">
+													<f:selectItem itemLabel="Selecione o responsável"
+														itemValue="" noSelectionOption="true" />
+													<f:selectItems value="#{backlogBean.usuarios}" />
+												</p:selectOneMenu>
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Responsável">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{sprintItem.situacao}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:selectOneMenu id="situação"
+													value="#{sprintItem.situacao}">
+													<f:selectItem itemLabel="Selecione a situação" itemValue=""
+														noSelectionOption="true" />
+
+													<f:selectItem itemLabel="Planejado" itemValue="Planejado" />
+													<f:selectItem itemLabel="Em Andamento"
+														itemValue="Em Andamento" />
+													<f:selectItem itemLabel="Realizada" itemValue="Realizada" />
+													<f:selectItem itemLabel="Removido" itemValue="Removido" />
+												</p:selectOneMenu>
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Observações">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{sprintItem.observacoes}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="observacoes"
+													value="#{sprintItem.observacoes}" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
 								</p:dataTable>
 							</h:panelGrid>
-						</p:tab>
-						<p:tab title="Revisão Sprint">
+						</h:form>
+					</p:tab>
+					<p:tab title="Revisão Sprint">
+						<h:form id="formRevisao">
 							<p:fieldset legend="Cadastro de revisão da Sprint"
 								toggleable="true">
 								<p:panelGrid>
@@ -97,12 +211,14 @@
 										<p:column>
 											<p:outputLabel value="Descrição:" />
 											<br />
-											<p:inputText id="descricao" />
+											<p:inputText id="descricao"
+												value="#{sprintDetailBean.revisao.descricao}" />
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Tipo de Revisão:" />
 											<br />
-											<p:selectOneMenu id="tipo">
+											<p:selectOneMenu id="tipo"
+												value="#{sprintDetailBean.revisao.tipo}">
 												<f:selectItem itemLabel="Selecione o tipo de" itemValue=""
 													noSelectionOption="true" />
 												<f:selectItem itemLabel="A Melhorar" itemValue="A Melhorar" />
@@ -111,22 +227,57 @@
 										</p:column>
 										<p:column>
 											<p:commandButton id="addItemRevisao" value="Salvar"
+												update="@form" action="#{sprintDetailBean.addRevisao}"
 												icon="ui-icon-check" />
 										</p:column>
 									</p:row>
 								</p:panelGrid>
 							</p:fieldset>
 							<h:panelGrid columns="2" cellpadding="10">
-								<p:dataTable value="#{itemSprintBean.itens}" var="sprint"
+								<p:dataTable value="#{sprintDetailBean.revisoes}" var="revisao"
 									rows="10" paginator="true" editable="true" editMode="cell"
 									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 									rowsPerPageTemplate="5,10,15">
 
+									<p:ajax event="cellEdit"
+										listener="#{sprintDetailBean.onCellEditRevisao(revisao)}"
+										update="@this" />
+
+									<p:column headerText="Id">
+										<h:outputText value="#{revisao.id}" />
+									</p:column>
+
+									<p:column headerText="Descrição">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{revisao.descricao}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="descricao" value="#{revisao.descricao}" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Tipo">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{revisao.tipo}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:selectOneMenu id="tipo" value="#{revisao.tipo}">
+													<f:selectItem itemLabel="Selecione o tipo de" itemValue=""
+														noSelectionOption="true" />
+													<f:selectItem itemLabel="A Melhorar" itemValue="A Melhorar" />
+													<f:selectItem itemLabel="Bom" itemValue="Bom" />
+												</p:selectOneMenu>
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
 								</p:dataTable>
 							</h:panelGrid>
-						</p:tab>
-					</p:accordionPanel>
-				</h:form>
+						</h:form>
+					</p:tab>
+				</p:accordionPanel>
 			</p:panel>
 		</ui:define>
 	</ui:composition>

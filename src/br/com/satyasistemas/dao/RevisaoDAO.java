@@ -1,5 +1,6 @@
 package br.com.satyasistemas.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,10 +8,14 @@ import javax.persistence.Query;
 
 import br.com.satyasistemas.dao.entity.Revisao;
 
-public class RevisaoDAO implements DAO<Revisao>{
-	
+public class RevisaoDAO implements DAO<Revisao>, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private EntityManager entityManager;
-	
+
 	public RevisaoDAO() {
 		super();
 		this.entityManager = DatabaseUtil.getEmf().createEntityManager();
@@ -19,20 +24,20 @@ public class RevisaoDAO implements DAO<Revisao>{
 	@Override
 	public void save(Revisao revisao) {
 		beginTransaction();
-		
-		if(revisao.getId() <= 0)
+
+		if (revisao.getId() <= 0)
 			entityManager.persist(revisao);
 		else
 			entityManager.merge(revisao);
-		
+
 		closeTransaction();
 	}
 
 	@Override
-	public Revisao findById(int id) {		
+	public Revisao findById(int id) {
 		return null;
 	}
-	
+
 	@Override
 	public void delete(Revisao revisao) {
 		beginTransaction();
@@ -47,17 +52,23 @@ public class RevisaoDAO implements DAO<Revisao>{
 		return query.getResultList();
 	}
 
+	public List<Revisao> listBySprintID(int id) {
+		Query query = entityManager.createNamedQuery(
+				"Revisao.findAllBySprintID").setParameter("sprintID", id);
+		return query.getResultList();
+	}
+
 	@Override
 	public List<Revisao> pageList() {
 		return null;
 	}
-	
-	private void beginTransaction(){
+
+	private void beginTransaction() {
 		entityManager.getTransaction().begin();
 	}
-	
-	private void closeTransaction(){
+
+	private void closeTransaction() {
 		entityManager.getTransaction().commit();
 	}
-	
+
 }
