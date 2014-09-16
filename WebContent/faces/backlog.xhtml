@@ -72,7 +72,7 @@
 				<h:form id="listItems">
 					<p:growl id="listMsgs" showDetail="true" />
 
-					<p:dataTable value="#{backlogBean.itensBacklog}" var="backlog"
+					<p:dataTable id="backlogTable" value="#{backlogBean.itensBacklog}" var="backlog"
 						rows="10" paginator="true" editable="true" editMode="cell"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="5,10,15">
@@ -167,6 +167,10 @@
 						</p:column>
 					</p:dataTable>
 				</h:form>
+				
+				<p:socket onMessage="handleMessage" channel="/backlogChange" />
+				
+				<h:outputScript library="javascript" name="backlog.js"/>
 
 				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
 					header="Tela de confirmação" appendTo="@(body)"
@@ -178,6 +182,19 @@
 							action="#{backlogBean.deleteBacklogItem}" />
 						<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
 							icon="ui-icon-close" value="Não" onclick="PF('delDlg').hide()" />
+					</h:form>
+				</p:confirmDialog>
+				
+				<p:confirmDialog closable="true" id="changeDlg" modal="true"
+					header="Alteração" appendTo="@(body)"
+					message="Houve alteração nesse backlog. Gostaria de atualizar?" widgetVar="changeDlg">
+					<h:form id="changeForm">
+						<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
+							icon="ui-icon-check" update=":listItems" value="Sim"
+							oncomplete="PF('changeDlg').hide()"
+							action="#{backlogBean.update}" />
+						<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
+							icon="ui-icon-close" value="Não" onclick="PF('changeDlg').hide()" />
 					</h:form>
 				</p:confirmDialog>
 			</p:panel>

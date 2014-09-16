@@ -11,13 +11,17 @@
 	<ui:composition>
 		<pe:layoutPane id="header" position="north" resizable="false"
 			closable="false" size="90" style="border: 0;">
-			<div style="width: 100%; height: 4em; border-collapse: separate;">
-				<div
-					style="width: 100%; height: 40px; background-color: rgba(35, 34, 34, 1)">
-					<h:graphicImage library="images" value="icons/light/appbar.pokeball.png"/>
-					<p:outputLabel styleClass="header-title">Clockwork</p:outputLabel>
-				</div>
-				<p:tabMenu activeIndex="#{param.i}">
+				<p:panelGrid id="header-grid">
+					<p:row style="height:3em;">
+						<p:column style="width:3em;">
+							<h:graphicImage style="width: 3em;" value="resources/images/icons/light/appbar.pokeball.png"/>
+						</p:column>
+						<p:column>
+							<p:outputLabel styleClass="header-title">Clockwork</p:outputLabel>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+				<p:tabMenu activeIndex="#{param.i}" id="menu">
 					<p:menuitem value="Backlog" outcome="backlog" icon="ui-icon-star">
 						<f:param name="i" value="0" />
 					</p:menuitem>
@@ -31,7 +35,6 @@
 						<f:param name="i" value="3" />
 					</p:menuitem>
 				</p:tabMenu>
-			</div>
 		</pe:layoutPane>
 	</ui:composition>
 </body>

@@ -70,6 +70,11 @@
 			<artifactId>primefaces-extensions</artifactId>
 			<version>2.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.atmosphere</groupId>
+			<artifactId>atmosphere-runtime</artifactId>
+			<version>2.1.3</version>
+		</dependency>
 
 		<!-- HIBERNATE -->
 		<dependency>
@@ -187,6 +192,13 @@
 			<artifactId>rewrite-config-prettyfaces</artifactId>
 			<version>2.0.8.Final</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		
 		
 	</dependencies>
 
