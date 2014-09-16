@@ -153,6 +153,11 @@
 						</p:column>
 					</p:dataTable>
 				</h:form>
+				
+				<p:socket onMessage="handleMessage" channel="/sprintsChange" />
+				
+				<h:outputScript library="javascript" name="sprints.js"/>
+				
 				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
 					header="Tela de confirmação" appendTo="@(body)"
 					message="Tem certeza que em deletar esse item?" widgetVar="delDlg">
@@ -163,6 +168,19 @@
 							action="#{sprintBean.deleteSprint}" />
 						<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
 							icon="ui-icon-close" value="Não" onclick="PF('delDlg').hide()" />
+					</h:form>
+				</p:confirmDialog>
+				
+				<p:confirmDialog closable="true" id="changeDlg" modal="true"
+					header="Alteração" appendTo="@(body)"
+					message="Houve alteração nos sprints. Gostaria de atualizar?" widgetVar="changeDlg">
+					<h:form id="changeForm">
+						<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
+							icon="ui-icon-check" update=":listItems" value="Sim"
+							oncomplete="PF('changeDlg').hide()"
+							action="#{sprintBean.update}" />
+						<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
+							icon="ui-icon-close" value="Não" onclick="PF('changeDlg').hide()" />
 					</h:form>
 				</p:confirmDialog>
 			</p:panel>
