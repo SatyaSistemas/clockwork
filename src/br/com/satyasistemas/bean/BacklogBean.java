@@ -25,14 +25,14 @@ public class BacklogBean implements Serializable {
 
 	private ProductBacklogDAO backlogDAO;
 	private UsuarioDAO usuarioDAO;
-
-	private List<ProductBacklog> itensBacklog = new ArrayList<ProductBacklog>();
+	private List<ProductBacklog> itensBacklog;
 	private ProductBacklog productBacklog;
 
 	public BacklogBean() {
 		backlogDAO = new ProductBacklogDAO();
 		productBacklog = new ProductBacklog();
 		usuarioDAO = new UsuarioDAO();
+		itensBacklog = new ArrayList<ProductBacklog>();
 	}
 
 	public List<ProductBacklog> getItensBacklog() {

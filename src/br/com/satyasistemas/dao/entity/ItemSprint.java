@@ -2,17 +2,20 @@ package br.com.satyasistemas.dao.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="item")
-@NamedQuery(name = "Item.findAll", query = "select i from Impedimento i")
-public class Item implements Serializable{
+@Table(name = "item_sprint")
+@NamedQueries({
+		@NamedQuery(name = "ItemSprint.findAll", query = "select i from ItemSprint i"),
+		@NamedQuery(name = "ItemSprint.findAllBySprintID", query = "select i from ItemSprint i where i.sprint = :sprintID") })
+public class ItemSprint implements Serializable {
 	/**
 	 * 
 	 */
@@ -20,29 +23,18 @@ public class Item implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id;
-	
-	private byte dependente;
 
-	@Column(name="horas_planejadas")
+	private boolean dependente;
 	private int horasPlanejadas;
-
-	@Column(name="horas_realizadas")
 	private int horasRealizadas;
-
 	private String nome;
-
 	private String observacoes;
-
 	private int prioridade;
-
 	private String responsavel;
-
 	private String situacao;
 
-//	@JoinColumn(name="fk_sprint")
-//	private Sprint sprint;
-
-	public Item() {}
+	@JoinColumn(name = "fk_sprint")
+	private int sprint;
 
 	public int getId() {
 		return this.id;
@@ -52,11 +44,11 @@ public class Item implements Serializable{
 		this.id = id;
 	}
 
-	public byte getDependente() {
+	public boolean getDependente() {
 		return this.dependente;
 	}
 
-	public void setDependente(byte dependente) {
+	public void setDependente(boolean dependente) {
 		this.dependente = dependente;
 	}
 
@@ -116,11 +108,12 @@ public class Item implements Serializable{
 		this.situacao = situacao;
 	}
 
-//	public Sprint getSprint() {
-//		return this.sprint;
-//	}
-//
-//	public void setSprint(Sprint sprint) {
-//		this.sprint = sprint;
-//	}
+	public int getSprint() {
+		return sprint;
+	}
+
+	public void setSprint(int sprint) {
+		this.sprint = sprint;
+	}
+
 }

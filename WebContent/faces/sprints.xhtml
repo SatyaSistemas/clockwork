@@ -13,7 +13,7 @@
 		<ui:define name="content">
 			<p:panel>
 				<h:form id="regItem">
-					<p:fieldset legend="Cadastro Itens Backlog" toggleable="true">
+					<p:fieldset legend="Cadastro de Sprints" toggleable="true">
 						<p:panelGrid>
 							<p:row>
 								<p:column>
@@ -141,24 +141,17 @@
 						</p:column>
 
 						<p:column headerText="Visualizar">
-							<p:commandButton value="Modal" type="button"
-								onclick="PF('dlgSprint').show();" />
 							<p:commandButton value="Deletar" onclick="PF('delDlg').show();">
 								<f:setPropertyActionListener value="#{sprint}"
 									target="#{sprintBean.sprint}" />
 							</p:commandButton>
+
+							<p:commandLink action="#{sprintBean.goSprintDetail}"
+								type="button" ajax="false" value="Detalhes">
+								<f:setPropertyActionListener target="#{sprintBean.sprint}" value="#{sprint}"></f:setPropertyActionListener>
+							</p:commandLink>
 						</p:column>
 					</p:dataTable>
-					<p:dialog header="Modal Dialog" widgetVar="dlgSprint" height="100">
-						<p:tabMenu activeIndex="#{param.i}">
-							<p:menuitem value="Itens Sprint" icon="ui-icon-star">
-								<f:param name="i" value="0" />
-							</p:menuitem>
-							<p:menuitem value="Impedimentos">
-								<f:param name="i" value="1" />
-							</p:menuitem>
-						</p:tabMenu>
-					</p:dialog>
 				</h:form>
 				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
 					header="Tela de confirmação" appendTo="@(body)"

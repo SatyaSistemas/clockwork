@@ -22,6 +22,12 @@
 		<view-id value="/faces/sprint.xhtml" />
 	</url-mapping>
 
+	<url-mapping id="sprintDetail" >
+		<pattern value="/sprintDetail" />
+		<view-id value="/faces/sprint-detail.xhtml" />
+		<query-param name="sprintID">#{sprintBean.sprint.id}</query-param>
+	</url-mapping>
+
 	<url-mapping id="usuarios">
 		<pattern value="/usuarios" />
 		<view-id value="/faces/usuarios.xhtml" />
