@@ -45,10 +45,12 @@
 							listener="#{usuarioBean.onCellEdit(usuario)}"
 							update=":listUsers:listMsgs" />
 
-						<p:column style="width:32px">
+						<p:column headerText="Id" style="width:32px" sortBy="#{usuario.id}"
+							filterBy="#{usuario.id}" filterMatchMode="contains">
 							<h:outputText value="#{usuario.id}" />
 						</p:column>
-						<p:column headerText="Usuário">
+						<p:column headerText="Usuário" sortBy="#{usuario.nome}"
+							filterBy="#{usuario.nome}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{usuario.nome}" />

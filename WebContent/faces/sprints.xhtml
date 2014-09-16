@@ -72,10 +72,12 @@
 							listener="#{sprintBean.onCellEdit(sprint)}"
 							update=":listItems:listMsgs" />
 
-						<p:column headerText="Id">
+						<p:column headerText="Id" sortBy="#{sprint.id}"
+							filterBy="#{sprint.id}" filterMatchMode="contains">
 							<h:outputText value="#{sprint.id}" />
 						</p:column>
-						<p:column headerText="Meta">
+						<p:column headerText="Meta" sortBy="#{sprint.meta}"
+							filterBy="#{sprint.meta}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{sprint.meta}" />
@@ -85,7 +87,9 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Definição de Pronto">
+						<p:column headerText="Definição de Pronto"
+							sortBy="#{sprint.definicaoPronto}"
+							filterBy="#{sprint.definicaoPronto}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{sprint.definicaoPronto}" />
@@ -95,7 +99,8 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Inicio">
+						<p:column headerText="Inicio" sortBy="#{sprint.inicio}"
+							filterBy="#{sprint.inicio}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{sprint.inicio}">
@@ -107,7 +112,8 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Termino">
+						<p:column headerText="Termino" sortBy="#{sprint.termino}"
+							filterBy="#{sprint.termino}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{sprint.termino}">
@@ -119,7 +125,8 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Tamanho">
+						<p:column headerText="Tamanho" sortBy="#{sprint.tamanho}"
+							filterBy="#{sprint.tamanho}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{sprint.tamanho}" />
@@ -129,7 +136,9 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Tamanho Realizado">
+						<p:column headerText="Tamanho Realizado"
+							sortBy="#{sprint.tamanhoRealizado}"
+							filterBy="#{sprint.tamanhoRealizado}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{sprint.tamanhoRealizado}" />
@@ -148,16 +157,17 @@
 
 							<p:commandLink action="#{sprintBean.goSprintDetail}"
 								type="button" ajax="false" value="Detalhes">
-								<f:setPropertyActionListener target="#{sprintBean.sprint}" value="#{sprint}"></f:setPropertyActionListener>
+								<f:setPropertyActionListener target="#{sprintBean.sprint}"
+									value="#{sprint}"></f:setPropertyActionListener>
 							</p:commandLink>
 						</p:column>
 					</p:dataTable>
 				</h:form>
-				
+
 				<p:socket onMessage="handleMessage" channel="/sprintsChange" />
-				
-				<h:outputScript library="javascript" name="sprints.js"/>
-				
+
+				<h:outputScript library="javascript" name="sprints.js" />
+
 				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
 					header="Tela de confirmação" appendTo="@(body)"
 					message="Tem certeza que em deletar esse item?" widgetVar="delDlg">
@@ -170,15 +180,15 @@
 							icon="ui-icon-close" value="Não" onclick="PF('delDlg').hide()" />
 					</h:form>
 				</p:confirmDialog>
-				
+
 				<p:confirmDialog closable="true" id="changeDlg" modal="true"
 					header="Alteração" appendTo="@(body)"
-					message="Houve alteração nos sprints. Gostaria de atualizar?" widgetVar="changeDlg">
+					message="Houve alteração nos sprints. Gostaria de atualizar?"
+					widgetVar="changeDlg">
 					<h:form id="changeForm">
 						<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
 							icon="ui-icon-check" update=":listItems" value="Sim"
-							oncomplete="PF('changeDlg').hide()"
-							action="#{sprintBean.update}" />
+							oncomplete="PF('changeDlg').hide()" action="#{sprintBean.update}" />
 						<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
 							icon="ui-icon-close" value="Não" onclick="PF('changeDlg').hide()" />
 					</h:form>

@@ -85,14 +85,13 @@
 							listener="#{impedimentoBean.onCellEdit(impedimento)}"
 							update=":listImp:listMsgs" />
 
-						<p:column style="width:32px">
-							<h:selectBooleanCheckbox />
-						</p:column>
-						<p:column headerText="Id">
+						<p:column headerText="Id" sortBy="#{impedimento.id}"
+							filterBy="#{impedimento.id}" filterMatchMode="contains">
 							<h:outputText value="#{impedimento.id}" />
 						</p:column>
 
-						<p:column headerText="Nome">
+						<p:column headerText="Nome"  sortBy="#{impedimento.impedimento}"
+							filterBy="#{impedimento.impedimento}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{impedimento.impedimento}" />
@@ -102,7 +101,8 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Reportado Por">
+						<p:column headerText="Reportado Por" sortBy="#{impedimento.reportado}"
+							filterBy="#{impedimento.reportado}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{impedimento.reportado}" />
@@ -117,7 +117,8 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Responsavel">
+						<p:column headerText="Responsavel" sortBy="#{impedimento.responsavel}"
+							filterBy="#{impedimento.responsavel}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{impedimento.responsavel}" />
@@ -132,7 +133,8 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Data Criação">
+						<p:column headerText="Data Criação" sortBy="#{impedimento.criacao}"
+							filterBy="#{impedimento.criacao}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{impedimento.criacao}">
@@ -145,7 +147,8 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Data Finalização">
+						<p:column headerText="Data Finalização" sortBy="#{impedimento.finalizacao}"
+							filterBy="#{impedimento.finalizacao}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{impedimento.finalizacao}">
@@ -158,7 +161,8 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Observacao">
+						<p:column headerText="Observacao" sortBy="#{impedimento.observacao}"
+							filterBy="#{impedimento.observacao}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{impedimento.observacao}" />

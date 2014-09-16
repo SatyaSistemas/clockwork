@@ -72,8 +72,9 @@
 				<h:form id="listItems">
 					<p:growl id="listMsgs" showDetail="true" />
 
-					<p:dataTable id="backlogTable" value="#{backlogBean.itensBacklog}" var="backlog"
-						rows="10" paginator="true" editable="true" editMode="cell"
+					<p:dataTable id="backlogTable" value="#{backlogBean.itensBacklog}"
+						var="backlog" rows="10" paginator="true" editable="true"
+						editMode="cell"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="5,10,15">
 
@@ -81,13 +82,13 @@
 							listener="#{backlogBean.onCellEdit(backlog)}"
 							update=":listItems:listMsgs" />
 
-						<p:column style="width:32px">
-							<h:selectBooleanCheckbox />
-						</p:column>
-						<p:column headerText="Id">
+						<p:column headerText="Id" sortBy="#{backlog.id}"
+							filterBy="#{backlog.id}" filterMatchMode="contains">
 							<h:outputText value="#{backlog.id}" />
 						</p:column>
-						<p:column headerText="Nome">
+						
+						<p:column headerText="Nome" sortBy="#{backlog.nome}"
+							filterBy="#{backlog.nome}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{backlog.nome}" />
@@ -98,7 +99,8 @@
 							</p:cellEditor>
 						</p:column>
 
-						<p:column headerText="Importância">
+						<p:column headerText="Importância" sortBy="#{backlog.importancia}"
+							filterBy="#{backlog.importancia}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{backlog.importancia}" />
@@ -109,7 +111,8 @@
 							</p:cellEditor>
 						</p:column>
 
-						<p:column headerText="Estimativa">
+						<p:column headerText="Estimativa" sortBy="#{backlog.estimativa}"
+							filterBy="#{backlog.estimativa}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{backlog.estimativa}" />
@@ -120,7 +123,9 @@
 							</p:cellEditor>
 						</p:column>
 
-						<p:column headerText="Demonstracao">
+						<p:column headerText="Demonstracao"
+							filterBy="#{backlog.estimativa}" filterMatchMode="contains"
+							sortBy="#{backlog.estimativa}">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{backlog.demonstracao}" />
@@ -131,7 +136,8 @@
 							</p:cellEditor>
 						</p:column>
 
-						<p:column headerText="Notas">
+						<p:column headerText="Notas" sortBy="#{backlog.notas}"
+							filterBy="#{backlog.notas}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{backlog.notas}" />
@@ -143,7 +149,8 @@
 						</p:column>
 
 
-						<p:column headerText="Solicitante">
+						<p:column headerText="Solicitante" sortBy="#{backlog.solicitante}"
+							filterBy="#{backlog.solicitante}" filterMatchMode="contains">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{backlog.solicitante}" />
@@ -167,10 +174,10 @@
 						</p:column>
 					</p:dataTable>
 				</h:form>
-				
+
 				<p:socket onMessage="handleMessage" channel="/backlogChange" />
-				
-				<h:outputScript library="javascript" name="backlog.js"/>
+
+				<h:outputScript library="javascript" name="backlog.js" />
 
 				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
 					header="Tela de confirmação" appendTo="@(body)"
@@ -184,10 +191,11 @@
 							icon="ui-icon-close" value="Não" onclick="PF('delDlg').hide()" />
 					</h:form>
 				</p:confirmDialog>
-				
+
 				<p:confirmDialog closable="true" id="changeDlg" modal="true"
 					header="Alteração" appendTo="@(body)"
-					message="Houve alteração nesse backlog. Gostaria de atualizar?" widgetVar="changeDlg">
+					message="Houve alteração nesse backlog. Gostaria de atualizar?"
+					widgetVar="changeDlg">
 					<h:form id="changeForm">
 						<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
 							icon="ui-icon-check" update=":listItems" value="Sim"
