@@ -16,6 +16,11 @@
 		<pattern value="/sprints" />
 		<view-id value="/faces/sprints.xhtml" />
 	</url-mapping>
+	
+	<url-mapping id="sprint">
+		<pattern value="/sprint" />
+		<view-id value="/faces/sprint.xhtml" />
+	</url-mapping>
 
 	<url-mapping id="usuarios">
 		<pattern value="/usuarios" />
