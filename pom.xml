@@ -5,6 +5,12 @@
 	<artifactId>ClockWork</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+
+	<properties>
+		<server.manager.url>http://192.168.0.10:8080/manager/text</server.manager.url>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -34,6 +40,15 @@
 							<classpathPrefix />
 						</manifest>
 					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<configuration>
+					<url>${server.manager.url}</url>
+					<server>TomcatServer</server>
+					<path>/ClockWork</path>
 				</configuration>
 			</plugin>
 		</plugins>
