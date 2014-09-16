@@ -198,9 +198,29 @@
 											</f:facet>
 										</p:cellEditor>
 									</p:column>
+									<p:column headerText="Acoes">
+										<p:commandButton value="Deletar"
+											onclick="PF('delItemDlg').show();">
+											<f:setPropertyActionListener value="#{sprintItem}"
+												target="#{sprintDetailBean.item}" />
+										</p:commandButton>
+									</p:column>
 								</p:dataTable>
 							</h:panelGrid>
 						</h:form>
+						<p:confirmDialog closable="true" id="deleteItemDlg" modal="true"
+							header="Tela de confirmação" appendTo="@(body)"
+							message="Tem certeza que em deletar esse item?"
+							widgetVar="delItemDlg">
+							<h:form id="deleteForm">
+								<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
+									icon="ui-icon-check" update="@all" value="Sim"
+									oncomplete="PF('delDlg').hide()"
+									action="#{sprintDetailBean.deleteItem}" />
+								<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
+									icon="ui-icon-close" value="Não" onclick="PF('delDlg').hide()" />
+							</h:form>
+						</p:confirmDialog>
 					</p:tab>
 					<p:tab title="Revisão Sprint">
 						<h:form id="formRevisao">
@@ -273,9 +293,29 @@
 											</f:facet>
 										</p:cellEditor>
 									</p:column>
+									<p:column headerText="Acoes">
+										<p:commandButton value="Deletar"
+											onclick="PF('deleteRevDlg').show();">
+											<f:setPropertyActionListener value="#{revisao}"
+												target="#{sprintDetailBean.revisao}" />
+										</p:commandButton>
+									</p:column>
 								</p:dataTable>
 							</h:panelGrid>
 						</h:form>
+						<p:confirmDialog closable="true" id="deleteRevDlg" modal="true"
+							header="Tela de confirmação" appendTo="@(body)"
+							message="Tem certeza que em deletar esse item?"
+							widgetVar="deleteRevDlg">
+							<h:form id="deleteRevForm">
+								<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
+									icon="ui-icon-check" update="@all" value="Sim"
+									oncomplete="PF('deleteRevDlg').hide()"
+									action="#{sprintDetailBean.deleteRevisao}" />
+								<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
+									icon="ui-icon-close" value="Não" onclick="PF('deleteRevDlg').hide()" />
+							</h:form>
+						</p:confirmDialog>
 					</p:tab>
 				</p:accordionPanel>
 			</p:panel>

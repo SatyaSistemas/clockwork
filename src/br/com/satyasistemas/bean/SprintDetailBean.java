@@ -63,6 +63,16 @@ public class SprintDetailBean implements Serializable {
 		itemSprintDAO.save(item);
 	}
 	
+	public void deleteItem(){
+		this.itemSprintDAO.delete(item);
+		this.item = new ItemSprint();
+	}
+	
+	public void deleteRevisao(){
+		this.revisaoDAO.delete(revisao);
+		this.revisao = new Revisao();
+	}
+	
 	public void onCellEditRevisao(Revisao revisao) {
 		this.revisaoDAO.save(revisao);
 	}

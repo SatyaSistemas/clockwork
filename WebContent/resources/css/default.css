@@ -1,8 +1,13 @@
 * {
-margin:0;
-padding:0;
-list-style:none;
-vertical-align:baseline;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	vertical-align: baseline;
+	font-size: 12px;
+}
+
+div.ui-datepicker {
+	font-size: 10px !important;
 }
 
 .header-title {
@@ -10,11 +15,11 @@ vertical-align:baseline;
 }
 
 .ui-widget, .ui-widget .ui-widget {
-    font-size: 90%;
+	font-size: 90%;
 }
 
 #header {
-	border:none;
+	border: none;
 }
 
 #header.pe-layout-pane-content {
