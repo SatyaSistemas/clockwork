@@ -2,7 +2,6 @@ package br.com.satyasistemas.dao.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="item")
 @NamedQuery(name = "Item.findAll", query = "select i from Impedimento i")
-public class Item implements Serializable{
+public class ItemSprint implements Serializable{
 	/**
 	 * 
 	 */
@@ -22,27 +21,18 @@ public class Item implements Serializable{
 	private int id;
 	
 	private byte dependente;
-
-	@Column(name="horas_planejadas")
 	private int horasPlanejadas;
-
-	@Column(name="horas_realizadas")
 	private int horasRealizadas;
-
 	private String nome;
-
 	private String observacoes;
-
 	private int prioridade;
-
 	private String responsavel;
-
 	private String situacao;
 
 //	@JoinColumn(name="fk_sprint")
 //	private Sprint sprint;
 
-	public Item() {}
+	public ItemSprint() {}
 
 	public int getId() {
 		return this.id;

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/faces/templates/layout.xhtml">
+		<ui:define name="rightPanel"></ui:define>
+		<ui:define name="leftPanel"></ui:define>
+		<ui:define name="content">
+			<p:panel>
+				<h:form>
+					<p:accordionPanel>
+						<p:tab title="Itens">
+							<p:fieldset legend="Cadastro de item da Sprint" toggleable="true">
+								<p:panelGrid>
+									<p:row>
+										<p:column>
+											<p:outputLabel value="Dependente:" />
+											<br />
+											<p:inputText id="dependente" />
+										</p:column>
+										<p:column>
+											<p:outputLabel value="Nome:" />
+											<br />
+											<p:inputText id="nome" value="#{null}" />
+										</p:column>
+										<p:column>
+											<p:outputLabel value="Horas Planejadas:" />
+											<br />
+											<p:inputText id="horPlanejadas" value="#{null}" />
+										</p:column>
+										<p:column>
+											<p:outputLabel value="Horas Realizadas:" />
+											<br />
+											<p:inputText id="horRealizadas" value="#{null}" />
+										</p:column>
+										<p:column>
+											<p:outputLabel value="Prioridade:" />
+											<br />
+											<p:inputText id="prioridade" value="#{null}" />
+										</p:column>
+										<p:column>
+											<p:outputLabel value="Solicitante:" />
+											<br />
+											<p:selectOneMenu id="usuario">
+												<f:selectItem itemLabel="Selecione o responsável"
+													itemValue="" noSelectionOption="true" />
+												<f:selectItems />
+											</p:selectOneMenu>
+										</p:column>
+										<p:column>
+											<p:outputLabel value="Situação" />
+											<br />
+											<p:selectOneMenu id="situação">
+												<f:selectItem itemLabel="Selecione a situação" itemValue=""
+													noSelectionOption="true" />
+
+												<f:selectItem itemLabel="Planejado" itemValue="Planejado" />
+												<f:selectItem itemLabel="Em Andamento"
+													itemValue="Em Andamento" />
+												<f:selectItem itemLabel="Realizada" itemValue="Realizada" />
+												<f:selectItem itemLabel="Removido" itemValue="Removido" />
+											</p:selectOneMenu>
+										</p:column>
+										<p:column>
+											<p:outputLabel value="Observações:" />
+											<br />
+											<p:inputText id="observacoes" value="#{null}" />
+										</p:column>
+										<p:column>
+											<p:commandButton id="addItemSprint" value="Salvar"
+												icon="ui-icon-check" />
+										</p:column>
+									</p:row>
+								</p:panelGrid>
+							</p:fieldset>
+							<h:panelGrid columns="2" cellpadding="10">
+								<p:dataTable value="#{itemSprintBean.itens}" var="sprint"
+									rows="10" paginator="true" editable="true" editMode="cell"
+									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
+
+								</p:dataTable>
+							</h:panelGrid>
+						</p:tab>
+						<p:tab title="Revisão Sprint">
+							<p:fieldset legend="Cadastro de revisão da Sprint"
+								toggleable="true">
+								<p:panelGrid>
+									<p:row>
+										<p:column>
+											<p:outputLabel value="Descrição:" />
+											<br />
+											<p:inputText id="descricao" />
+										</p:column>
+										<p:column>
+											<p:outputLabel value="Tipo de Revisão:" />
+											<br />
+											<p:selectOneMenu id="tipo">
+												<f:selectItem itemLabel="Selecione o tipo de" itemValue=""
+													noSelectionOption="true" />
+												<f:selectItem itemLabel="A Melhorar" itemValue="A Melhorar" />
+												<f:selectItem itemLabel="Bom" itemValue="Bom" />
+											</p:selectOneMenu>
+										</p:column>
+										<p:column>
+											<p:commandButton id="addItemRevisao" value="Salvar"
+												icon="ui-icon-check" />
+										</p:column>
+									</p:row>
+								</p:panelGrid>
+							</p:fieldset>
+							<h:panelGrid columns="2" cellpadding="10">
+								<p:dataTable value="#{itemSprintBean.itens}" var="sprint"
+									rows="10" paginator="true" editable="true" editMode="cell"
+									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="5,10,15">
+
+								</p:dataTable>
+							</h:panelGrid>
+						</p:tab>
+					</p:accordionPanel>
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

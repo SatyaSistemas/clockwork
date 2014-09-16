@@ -59,5 +59,9 @@ public class SprintBean implements Serializable {
 	public void setSprint(Sprint sprint) {
 		this.sprint = sprint;
 	}
+	
+	public String goSprintDetail(){
+		return "pretty:sprintDetail";
+	}
 
 }

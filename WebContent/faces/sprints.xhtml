@@ -147,18 +147,11 @@
 								<f:setPropertyActionListener value="#{sprint}"
 									target="#{sprintBean.sprint}" />
 							</p:commandButton>
+
+							<p:commandLink action="#{sprintBean.goSprintDetail}"
+								ajax="false" value="Detalhes" />
 						</p:column>
 					</p:dataTable>
-					<p:dialog header="Modal Dialog" widgetVar="dlgSprint" height="100">
-						<p:tabMenu activeIndex="#{param.i}">
-							<p:menuitem value="Itens Sprint" icon="ui-icon-star">
-								<f:param name="i" value="0" />
-							</p:menuitem>
-							<p:menuitem value="Impedimentos">
-								<f:param name="i" value="1" />
-							</p:menuitem>
-						</p:tabMenu>
-					</p:dialog>
 				</h:form>
 				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
 					header="Tela de confirmação" appendTo="@(body)"
@@ -172,7 +165,6 @@
 							icon="ui-icon-close" value="Não" onclick="PF('delDlg').hide()" />
 					</h:form>
 				</p:confirmDialog>
-
 			</p:panel>
 		</ui:define>
 	</ui:composition>
