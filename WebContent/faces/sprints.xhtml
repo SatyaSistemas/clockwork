@@ -108,7 +108,8 @@
 									</h:outputText>
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText id="inicio" value="#{sprint.inicio}" />
+									<p:calendar id="inicio" pattern="dd-MM-yyyy"
+										value="#{sprint.inicio}" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
@@ -121,7 +122,8 @@
 									</h:outputText>
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText id="termino" value="#{sprint.termino}" />
+									<p:calendar id="termino" pattern="dd-MM-yyyy"
+										value="#{sprint.termino}" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
