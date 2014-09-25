@@ -14,7 +14,7 @@
 			<p:panel>
 				<p:accordionPanel>
 					<p:tab title="Itens">
-						<h:form id="regItems">
+						<h:form id="RegistroItensDaSprint">
 							<p:fieldset legend="Cadastro de item da Sprint" toggleable="true">
 								<p:panelGrid>
 									<p:row>
@@ -27,7 +27,7 @@
 										<p:column>
 											<p:outputLabel value="Nome:" />
 											<br />
-											<p:inputText id="nome" value="#{sprintDetailBean.item.nome}" />
+											<p:inputText id="Nome" value="#{sprintDetailBean.item.nome}" />
 										</p:column>
 										<p:column>
 											<p:outputLabel value="Horas Planejadas:" />
@@ -119,7 +119,7 @@
 											</f:facet>
 										</p:cellEditor>
 									</p:column>
-									<p:column headerText="Horas Planejadas:">
+									<p:column headerText="Horas Planejadas">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{sprintItem.horasPlanejadas}" />
@@ -167,7 +167,7 @@
 											</f:facet>
 										</p:cellEditor>
 									</p:column>
-									<p:column headerText="Responsável">
+									<p:column headerText="Situação">
 										<p:cellEditor>
 											<f:facet name="output">
 												<h:outputText value="#{sprintItem.situacao}" />
@@ -198,7 +198,7 @@
 											</f:facet>
 										</p:cellEditor>
 									</p:column>
-									<p:column headerText="Acoes">
+									<p:column headerText="Ações">
 										<p:commandButton value="Deletar"
 											onclick="PF('delItemDlg').show();">
 											<f:setPropertyActionListener value="#{sprintItem}"

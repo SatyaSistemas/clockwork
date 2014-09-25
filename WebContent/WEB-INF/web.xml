@@ -5,7 +5,7 @@
 	version="3.0">
 	<display-name>ClockWork</display-name>
 	<welcome-file-list>
-	    <welcome-file>faces/backlog.xhtml</welcome-file>
+		<welcome-file>faces/backlog.xhtml</welcome-file>
 	</welcome-file-list>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -38,12 +38,20 @@
 		<param-value>1</param-value>
 	</context-param>
 	<context-param>
-	    <param-name>org.apache.myfaces.PRETTY_HTML</param-name>
-	    <param-value>true</param-value>
-  	</context-param>
-  	<context-param>
+		<param-name>org.apache.myfaces.PRETTY_HTML</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
 		<param-name>useHttpOnly</param-name>
 		<param-value>false</param-value>
 	</context-param>
-  
+	<context-param>
+		<param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
 </web-app>

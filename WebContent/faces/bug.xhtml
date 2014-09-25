@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/faces/templates/layout.xhtml">
+		<ui:define name="rightPanel"></ui:define>
+		<ui:define name="leftPanel"></ui:define>
+		<ui:define name="content">
+			<p:panel>
+				<h:form id="RegistroBugs">
+					<p:growl id="regMsgs2" showDetail="true" />
+					<p:fieldset legend="Cadastro de Bugs" toggleable="true">
+						<p:panelGrid>
+							<p:row>
+								<p:column>
+									<p:outputLabel value="Nome:" />
+									<br />
+									<p:inputText id="Nome"
+										value="#{bugBean.bug.nome}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Projeto:" />
+									<br />
+									<p:inputText id="Projeto"
+										value="#{bugBean.bug.projeto}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Descrição:" />
+									<br />
+									<p:inputText id="Descricao"
+										value="#{bugBean.bug.descricao}" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="Autor do Report:" />
+									<br />
+									<p:selectOneMenu id="Autor"
+										value="#{bugBean.bug.autor}">
+										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{bugBean.usuarios}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column>
+											<p:outputLabel value="Situação:" />
+											<br />
+											<p:selectOneMenu id="Situacao"
+												value="#{bugBean.bug.status}">
+												<f:selectItem itemLabel="Selecione a situação" itemValue=""
+													noSelectionOption="true" />
+
+												<f:selectItem itemLabel="Reportado" itemValue="Reportado" />
+												<f:selectItem itemLabel="Corrigindo"
+													itemValue="Corrigindo" />
+												<f:selectItem itemLabel="Corrigido" itemValue="Corrigido" />
+											</p:selectOneMenu>
+										</p:column>
+								<p:column>
+									<p:commandButton id="add" value="Salvar"
+										update=":listItems, :RegistroBugs"
+										actionListener="#{bugBean.addBug}"
+										icon="ui-icon-check" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:fieldset>
+				</h:form>
+				<br />
+				<br />
+				<h:form id="listItems">
+					<p:growl id="listMsgs2" showDetail="true" />
+
+					<p:dataTable id="bugs" value="#{bugBean.bugList}"
+						var="bug" rows="10" paginator="true" editable="true"
+						editMode="cell"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+
+						<p:ajax event="cellEdit"
+							listener="#{bugBean.onCellEdit(bug)}"
+							update=":listItems:listMsgs2" />
+
+						<p:column headerText="Id" sortBy="#{bug.id}"
+							filterBy="#{bug.id}" filterMatchMode="contains">
+							<h:outputText value="#{bug.id}" />
+						</p:column>
+						
+						<p:column headerText="Nome" sortBy="#{bug.nome}"
+							filterBy="#{bug.nome}" filterMatchMode="contains">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{bug.nome}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nome2" value="#{bug.nome}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Projeto" sortBy="#{bug.projeto}"
+							filterBy="#{bug.projeto}" filterMatchMode="contains">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{bug.projeto}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="projeto2" value="#{bug.projeto}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Descrição" sortBy="#{bug.descricao}"
+							filterBy="#{bug.descricao}" filterMatchMode="contains">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{bug.descricao}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="descricao2" value="#{bug.descricao}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Autor" sortBy="#{bug.autor}"
+							filterBy="#{bug.autor}" filterMatchMode="contains">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{bug.autor}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneMenu id="autor2"
+										value="#{bug.autor}" styleClass="one-menu-edit without-trigger">
+										<f:selectItem  itemLabel="Selecione o usuário" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{bugBean.usuarios}" />
+									</p:selectOneMenu>	
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Status" sortBy="#{bug.status}"
+							filterBy="#{bug.status}" filterMatchMode="contains">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{bug.status}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneMenu id="situacao2"
+										value="#{bug.status}" styleClass="one-menu-edit without-trigger">
+										<f:selectItem itemLabel="Selecione a situação" itemValue=""
+													noSelectionOption="true" />
+										<f:selectItem itemLabel="Reportado" itemValue="Reportado" />
+										<f:selectItem itemLabel="Corrigindo" itemValue="Corrigindo" />
+										<f:selectItem itemLabel="Corrigido" itemValue="Corrigido" />
+									</p:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Ações">
+							<p:commandButton value="Deletar" onclick="PF('delDlg').show();">
+								<f:setPropertyActionListener value="#{bug}"
+									target="#{bugBean.bug}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+
+				<p:socket onMessage="handleMessage" channel="/bugChange" />
+
+				<h:outputScript library="javascript" name="bug.js" />
+
+				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
+					header="Tela de confirmação" appendTo="@(body)"
+					message="Tem certeza que em deletar esse bug?" widgetVar="delDlg">
+					<h:form id="deleteForm">
+						<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
+							icon="ui-icon-check" update=":listItems" value="Sim"
+							oncomplete="PF('delDlg').hide()"
+							action="#{bugBean.deleteBug}" />
+						<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
+							icon="ui-icon-close" value="Não" onclick="PF('delDlg').hide()" />
+					</h:form>
+				</p:confirmDialog>
+
+				<p:confirmDialog closable="true" id="changeDlg" modal="true"
+					header="Alteração" appendTo="@(body)"
+					message="Houve alteração na lista de Bugs. Gostaria de atualizar?"
+					widgetVar="changeDlg">
+					<h:form id="changeForm">
+						<p:commandButton id="confirm" styleClass="ui-confirmdialog-yes"
+							icon="ui-icon-check" update=":listItems" value="Sim"
+							oncomplete="PF('changeDlg').hide()"
+							action="#{bugBean.update}" />
+						<p:commandButton id="decline" styleClass="ui-confirmdialog-no"
+							icon="ui-icon-close" value="Não" onclick="PF('changeDlg').hide()" />
+					</h:form>
+				</p:confirmDialog>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

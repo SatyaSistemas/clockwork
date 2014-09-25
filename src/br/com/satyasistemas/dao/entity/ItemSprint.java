@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "item_sprint")
@@ -23,14 +26,23 @@ public class ItemSprint implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
-
+	
+	@NotNull(message="A dependência deve ser informada.")
 	private boolean dependente;
+	
 	private int horasPlanejadas;
+
 	private int horasRealizadas;
+	
+	@NotEmpty(message="Nome não informado.")
 	private String nome;
+	
 	private String observacoes;
+	
 	private int prioridade;
+	
 	private String responsavel;
+	
 	private String situacao;
 
 	@JoinColumn(name = "fk_sprint")

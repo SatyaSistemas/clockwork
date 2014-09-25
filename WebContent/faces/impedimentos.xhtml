@@ -12,7 +12,7 @@
 		<ui:define name="leftPanel"></ui:define>
 		<ui:define name="content">
 			<p:panel>
-				<h:form id="regImp">
+				<h:form id="RegistroImpedimentos">
 					<p:fieldset legend="Cadastro de Impedimentos" toggleable="true">
 						<p:panelGrid>
 							<p:row>
@@ -63,7 +63,7 @@
 
 								<p:column>
 									<p:commandButton id="add" value="Salvar"
-										update=":regImp,:listImp"
+										update=":RegistroImpedimentos,:listImp"
 										actionListener="#{impedimentoBean.addImpedimento}"
 										icon="ui-icon-check" />
 								</p:column>
@@ -108,8 +108,8 @@
 									<h:outputText value="#{impedimento.reportado}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:selectOneMenu id="usuarioReport"
-										value="#{impedimento.reportado}">
+									<p:selectOneMenu id="usuarioReport" value="#{impedimento.reportado}"
+										 styleClass="one-menu-edit without-trigger">
 										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
 											noSelectionOption="true" />
 										<f:selectItems value="#{impedimentoBean.usuarios}" />
@@ -124,8 +124,8 @@
 									<h:outputText value="#{impedimento.responsavel}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:selectOneMenu id="responsavel"
-										value="#{impedimento.responsavel}">
+									<p:selectOneMenu id="responsavel" value="#{impedimento.responsavel}"
+										styleClass="one-menu-edit without-trigger">
 										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
 											noSelectionOption="true" />
 										<f:selectItems value="#{impedimentoBean.usuarios}" />
@@ -180,6 +180,12 @@
 						</p:column>
 					</p:dataTable>
 				</h:form>
+				
+				<p:socket onMessage="handleMessage" channel="/impedimentoChange" />
+
+				<h:outputScript library="javascript" name="impedimento.js" />
+				
+				
 				<p:confirmDialog closable="true" id="deleteDlg" modal="true"
 					header="Tela de confirmação" appendTo="@(body)"
 					message="Tem certeza que em deletar esse item?" widgetVar="delDlg">

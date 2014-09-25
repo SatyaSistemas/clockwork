@@ -12,7 +12,7 @@
 		<ui:define name="leftPanel"></ui:define>
 		<ui:define name="content">
 			<p:panel>
-				<h:form id="regItem">
+				<h:form id="RegistroItemBacklog">
 					<p:growl id="regMsgs" showDetail="true" />
 					<p:fieldset legend="Cadastro Itens Backlog" toggleable="true">
 						<p:panelGrid>
@@ -20,31 +20,38 @@
 								<p:column>
 									<p:outputLabel value="Nome:" />
 									<br />
-									<p:inputText id="nome"
+									<p:inputText id="Nome"
 										value="#{backlogBean.productBacklog.nome}" />
 								</p:column>
 								<p:column>
 									<p:outputLabel value="Importância:" />
 									<br />
-									<p:inputText id="importancia"
+									<p:inputText id="Importancia"
 										value="#{backlogBean.productBacklog.importancia}" />
 								</p:column>
 								<p:column>
 									<p:outputLabel value="Estimativa:" />
 									<br />
-									<p:inputText id="estimativa"
+									<p:inputText id="Estimativa"
 										value="#{backlogBean.productBacklog.estimativa}" />
 								</p:column>
 								<p:column>
 									<p:outputLabel value="Demonstração:" />
 									<br />
-									<p:inputText id="demonstracao"
+									<p:inputText id="Demonstracao"
 										value="#{backlogBean.productBacklog.demonstracao}" />
 								</p:column>
 								<p:column>
+									<p:outputLabel value="Notas:" />
+									<br />
+									<p:inputText id="Notas"
+										value="#{backlogBean.productBacklog.notas}" />
+								</p:column>
+								
+								<p:column>
 									<p:outputLabel value="Solicitante:" />
 									<br />
-									<p:selectOneMenu id="usuario"
+									<p:selectOneMenu id="Usuario"
 										value="#{backlogBean.productBacklog.solicitante}">
 										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
 											noSelectionOption="true" />
@@ -52,14 +59,21 @@
 									</p:selectOneMenu>
 								</p:column>
 								<p:column>
-									<p:outputLabel value="Notas:" />
+									<p:outputLabel value="Situação:" />
 									<br />
-									<p:inputText id="notas"
-										value="#{backlogBean.productBacklog.notas}" />
+									<p:selectOneMenu id="Situacao"
+										value="#{backlogBean.productBacklog.status}">
+										<f:selectItem itemLabel="Selecione a situação" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItem itemLabel="Pendente" itemValue="Pendente" />
+										<f:selectItem itemLabel="Executando" itemValue="Executando" />
+										<f:selectItem itemLabel="Finalizado" itemValue="Finalizado" />
+										<f:selectItem itemLabel="Cancelado" itemValue="Cancelado" />
+									</p:selectOneMenu>
 								</p:column>
 								<p:column>
 									<p:commandButton id="add" value="Salvar"
-										update=":listItems, :regItem"
+										update=":listItems, :RegistroItemBacklog"
 										actionListener="#{backlogBean.addBacklogItem}"
 										icon="ui-icon-check" />
 								</p:column>
@@ -148,7 +162,6 @@
 							</p:cellEditor>
 						</p:column>
 
-
 						<p:column headerText="Solicitante" sortBy="#{backlog.solicitante}"
 							filterBy="#{backlog.solicitante}" filterMatchMode="contains">
 							<p:cellEditor>
@@ -157,13 +170,33 @@
 								</f:facet>
 								<f:facet name="input">
 									<p:selectOneMenu id="solicitante"
-										value="#{backlog.solicitante}">
+										value="#{backlog.solicitante}" styleClass="one-menu-edit without-trigger">
 										<f:selectItem itemLabel="Selecione o usuário" itemValue=""
 											noSelectionOption="true" />
 										<f:selectItems value="#{backlogBean.usuarios}" />
 									</p:selectOneMenu>
 								</f:facet>
 							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Situação" sortBy="#{backlog.status}"
+						filterBy="#{backlog.status}" filterMatchMode="contains">
+						<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{backlog.status}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu id="Situacao" value="#{backlog.status}"
+							styleClass="one-menu-edit without-trigger">
+								<f:selectItem itemLabel="Selecione a situação" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItem itemLabel="Pendente" itemValue="Pendente" />
+								<f:selectItem itemLabel="Executando" itemValue="Executando" />
+								<f:selectItem itemLabel="Finalizado" itemValue="Finalizado" />
+								<f:selectItem itemLabel="Cancelado" itemValue="Cancelado" />
+							</p:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
 						</p:column>
 
 						<p:column headerText="Ações">

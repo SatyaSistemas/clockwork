@@ -11,6 +11,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * The persistent class for the sprint database table.
@@ -27,21 +31,28 @@ public class Sprint implements Serializable {
 	private int id;
 
 	@Column(name = "definicao_pronto")
+	@NotEmpty(message="Definição de pronto não informada.")
 	private String definicaoPronto;
 
 	@Temporal(TemporalType.DATE)
+	@NotNull(message="Data de início não informada.")
 	private Date inicio;
 
+	@NotEmpty(message="Meta não informada.")
 	private String meta;
 
+	@Min(value = 1, message="O tamanho deve ser maior que 0.")
 	private int tamanho;
 
+	@Min(value = 0, message="O tamanho realizado deve ser maior ou igual a zero")
 	@Column(name = "tamanho_realizado")
 	private int tamanhoRealizado;
 
 	@Temporal(TemporalType.DATE)
+	@NotNull(message="Data de término não informada.")
 	private Date termino;
 
+	
 	public int getId() {
 		return this.id;
 	}

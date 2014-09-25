@@ -1,3 +1,9 @@
+/* Por favor, ordene as regras css por tipos e ordem alfabética */
+
+/***********/
+/*  TAGS   */
+/***********/
+
 * {
 	margin: 0;
 	padding: 0;
@@ -12,6 +18,10 @@ div.ui-datepicker {
 	list-style:none;
 	vertical-align:baseline;
 }
+
+/***********/
+/*   IDS   */
+/***********/
 
 #header {
 	border:none;
@@ -43,14 +53,23 @@ div.ui-datepicker {
 	background-color: #000000;
 }
 
-.header-title {
+#menu {
+	borderone-menu-edit:0;
+}
+
+/***********/
+/* CLASSES */
+/***********/
+
+.header-tione-menu-edittle {
 	color: white;
-	font-weight: bolder;
+	font-weighone-menu-editt: bolder;
 	font-size: 110% !important;
 }
 
-#menu {
-	border:0;
+.one-menu-edit {
+	width: 90% !important;
+	vertical-align:middle;
 }
 
 .ui-widget, .ui-widget .ui-widget {
@@ -59,4 +78,8 @@ div.ui-datepicker {
 
 .ui-panelgrid-cell{
 	vertical-align: middle;
+}
+
+.without-trigger .ui-selectonemenu-trigger{
+	display:none;
 }

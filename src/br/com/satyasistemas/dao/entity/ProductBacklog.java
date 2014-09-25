@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "product_backlog")
@@ -19,11 +22,24 @@ public class ProductBacklog implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id;
+	
+	@NotEmpty(message="Nome não informado.")
 	private String nome;
+	
+	@Min(value = 1, message="A importância deve ser maior que 0.")
 	private int importancia;
+	
+	@Min(value = 1, message="A estimativa deve ser maior que 0.")
 	private int estimativa;
+	
+	@NotEmpty(message="Demonstração não informada.")
 	private String demonstracao;
+	
 	private String notas;
+	
+	@NotEmpty(message="Situação não informada.")
+	private String status;
+	
 	private String solicitante;
 
 	public int getId() {
@@ -33,7 +49,7 @@ public class ProductBacklog implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -41,7 +57,7 @@ public class ProductBacklog implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
 	public int getImportancia() {
 		return importancia;
 	}
@@ -49,7 +65,7 @@ public class ProductBacklog implements Serializable{
 	public void setImportancia(int importancia) {
 		this.importancia = importancia;
 	}
-
+	
 	public int getEstimativa() {
 		return estimativa;
 	}
@@ -57,7 +73,7 @@ public class ProductBacklog implements Serializable{
 	public void setEstimativa(int estimativa) {
 		this.estimativa = estimativa;
 	}
-
+	
 	public String getDemonstracao() {
 		return demonstracao;
 	}
@@ -65,7 +81,7 @@ public class ProductBacklog implements Serializable{
 	public void setDemonstracao(String demonstracao) {
 		this.demonstracao = demonstracao;
 	}
-
+	
 	public String getNotas() {
 		return notas;
 	}
@@ -73,7 +89,7 @@ public class ProductBacklog implements Serializable{
 	public void setNotas(String notas) {
 		this.notas = notas;
 	}
-
+	
 	public String getSolicitante() {
 		return solicitante;
 	}
@@ -84,10 +100,15 @@ public class ProductBacklog implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ProductBacklog [id=" + id + ", nome=" + nome + ", importancia="
-				+ importancia + ", estimativa=" + estimativa
-				+ ", demonstracao=" + demonstracao + ", notas=" + notas
-				+ ", solicitante=" + solicitante + "]";
+		return nome;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

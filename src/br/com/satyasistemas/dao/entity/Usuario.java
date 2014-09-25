@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "usuario")
 @NamedQuery(name = "Usuario.findAll", query = "select i from Usuario i")
@@ -20,6 +22,8 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
+	
+	@NotEmpty(message="Nome não informado.")
 	private String nome;
 
 	public int getId() {

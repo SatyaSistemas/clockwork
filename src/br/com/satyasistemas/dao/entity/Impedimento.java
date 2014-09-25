@@ -10,6 +10,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "impedimentos")
@@ -24,13 +27,20 @@ public class Impedimento implements Serializable {
 	@GeneratedValue
 	private int id;
 	
+	@NotEmpty(message="Impedimento não informado.")
 	private String impedimento;
+	
+	@NotEmpty(message="Autor do impedimento não informado.")
 	private String reportado;
+	
 	private String responsavel;
 	
 	@Temporal(TemporalType.DATE)
+	@NotNull(message="Data de criação não informada.")
 	private Date criacao;
+	
 	@Temporal(TemporalType.DATE)
+	@NotNull(message="Data de finalização não informada.")
 	private Date finalizacao;
 	
 	private String observacao;

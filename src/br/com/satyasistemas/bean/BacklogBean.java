@@ -62,8 +62,14 @@ public class BacklogBean implements Serializable {
 
 	public void addBacklogItem() {
 		if (productBacklog.getNome() == null
-				|| productBacklog.getNome().equals("")
-				|| productBacklog.getImportancia() <= 0) {
+			|| productBacklog.getDemonstracao() == null
+			|| productBacklog.getEstimativa() < 1
+			|| productBacklog.getImportancia() < 1
+			|| productBacklog.getSolicitante() == null
+			|| productBacklog.getNome().equals("")
+			|| productBacklog.getDemonstracao().equals("")
+			|| productBacklog.getStatus() == null
+				) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -71,20 +77,22 @@ public class BacklogBean implements Serializable {
 							"Dados inválidos, favor verificar os campos"));
 		} else {
 			backlogDAO.save(productBacklog);
-			productBacklog = new ProductBacklog();
 			publishEvent("added");
+			update();
 		}
 	}
 
 	public void onCellEdit(ProductBacklog backlog) {
 		backlogDAO.save(backlog);
 		publishEvent("edited");
+		update();
 	}
 	
 	public void deleteBacklogItem(){
 		System.out.println(this.productBacklog);
 		backlogDAO.delete(this.productBacklog);
 		publishEvent("removed");
+		update();
 	}
 	
 	public List<Usuario> getUsuarios(){
@@ -100,6 +108,7 @@ public class BacklogBean implements Serializable {
 	}
 	
 	public void update(){
+		productBacklog = new ProductBacklog();
 		backlogDAO = new ProductBacklogDAO();
 		itensBacklog = backlogDAO.list();
 	}

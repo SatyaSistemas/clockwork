@@ -21,6 +21,11 @@
 		<pattern value="/sprint" />
 		<view-id value="/faces/sprint.xhtml" />
 	</url-mapping>
+	
+	<url-mapping id="bug">
+		<pattern value="/bug" />
+		<view-id value="/faces/bug.xhtml" />
+	</url-mapping>
 
 	<url-mapping id="sprintDetail" >
 		<pattern value="/sprintDetail" />

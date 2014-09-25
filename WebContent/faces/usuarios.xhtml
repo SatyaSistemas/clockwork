@@ -12,19 +12,19 @@
 		<ui:define name="leftPanel"></ui:define>
 		<ui:define name="content">
 			<p:panel>
-				<h:form id="regUser">
+				<h:form id="RegistroUsuario">
 					<p:fieldset legend="Cadastro de Usuários" toggleable="true">
 						<p:panelGrid>
 							<p:row>
 								<p:column>
 									<p:outputLabel value="Nome:" />
 									<br />
-									<p:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
+									<p:inputText id="Nome" value="#{usuarioBean.usuario.nome}" />
 								</p:column>
 
 								<p:column>
 									<p:commandButton id="add" value="Salvar"
-										update=":listUsers,:regUser"
+										update=":listUsers,:RegistroUsuario"
 										actionListener="#{usuarioBean.addUser}" icon="ui-icon-check" />
 								</p:column>
 							</p:row>
