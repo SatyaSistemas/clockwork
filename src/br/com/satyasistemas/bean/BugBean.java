@@ -103,8 +103,10 @@ public class BugBean implements Serializable {
 	
 	public void update(){
 		this.bug = new Bug();
+		bugDAO.getEntityManager().close();
 		bugDAO = new BugDAO();
 		bugList= bugDAO.list();
 	}
+
 	
 }

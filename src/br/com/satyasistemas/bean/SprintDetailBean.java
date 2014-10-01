@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -47,20 +48,48 @@ public class SprintDetailBean implements Serializable {
 		sprintId = Integer.valueOf(params.get("sprintID"));
 	}
 
+	
+	
 	public void addItemSprint() {
-		this.item.setSprint(sprintId);
-		this.itemSprintDAO.save(item);
-		this.item = new ItemSprint();
+		if (item.getNome() == null
+			|| item.getPrioridade() < 1
+			|| item.getSituacao() == null
+				) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Erro ao cadastrar",
+							"Dados inválidos, favor verificar os campos"));
+		} else {
+			this.item.setSprint(sprintId);
+			this.itemSprintDAO.save(item);
+			this.item = new ItemSprint();
+			itemSprintDAO.getEntityManager().close();
+			itemSprintDAO = new ItemSprintDAO();
+		}
 	}
 	
-	public void addRevisao(){
-		this.revisao.setSprint(sprintId);
-		this.revisaoDAO.save(revisao);
-		this.revisao = new Revisao();
-	}
+	
+	public void addRevisao() {
+		if (revisao.getDescricao() == null
+			|| revisao.getTipo() == null
+				) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Erro ao cadastrar",
+							"Dados inválidos, favor verificar os campos"));
+		} else {
+			this.revisao.setSprint(sprintId);
+			this.revisaoDAO.save(revisao);
+			this.revisao = new Revisao();
+		}
+	}	
 
 	public void onCellEdit(ItemSprint item) {
 		itemSprintDAO.save(item);
+		itemSprintDAO.getEntityManager().close();
+		itemSprintDAO = new ItemSprintDAO();
 	}
 	
 	public void deleteItem(){

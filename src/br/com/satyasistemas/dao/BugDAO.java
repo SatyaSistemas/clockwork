@@ -65,4 +65,8 @@ public class BugDAO implements DAO<Bug>, Serializable{
 		entityManager.getTransaction().commit();
 	}
 	
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+	
 }

@@ -19,7 +19,11 @@
 								<p:column>
 									<p:outputLabel value="Meta:" />
 									<br />
-									<p:inputText id="Meta" value="#{sprintBean.sprint.meta}" />
+									<p:selectCheckboxMenu id="menu" value="#{sprintBean.metas}"
+										label="Backlogs" filter="true" filterMatchMode="contains">
+										<f:selectItems value="#{sprintBean.backlogs}" var="b"
+											itemLabel="#{b.nome}" itemValue="#{b.nome}" />
+									</p:selectCheckboxMenu>
 								</p:column>
 								<p:column>
 									<p:outputLabel value="Definição de Pronto:" />
@@ -40,13 +44,11 @@
 										value="#{sprintBean.sprint.termino}" />
 								</p:column>
 								<p:column>
-									<p:outputLabel for="Tamanho" value="Tamanho: "/>
+									<p:outputLabel for="Tamanho" value="Tamanho: " />
 									<br />
-									<p:inputText id="Tamanho" value="#{sprintBean.sprint.tamanho}" label="Tamanho"/>
+									<p:inputText id="Tamanho" value="#{sprintBean.sprint.tamanho}"
+										label="Tamanho" />
 									<p:message for="Tamanho" />
-           							
-									
-
 								</p:column>
 								<p:column>
 									<p:outputLabel value="Tamanho Realizado:" />
@@ -55,8 +57,7 @@
 										value="#{sprintBean.sprint.tamanhoRealizado}" />
 								</p:column>
 								<p:column>
-									<p:commandButton id="add" value="Salvar"
-										validateClient="true"
+									<p:commandButton id="add" value="Salvar" validateClient="true"
 										update=":RegistroDeSprints, :listItems"
 										action="#{sprintBean.addSprintItem}" icon="ui-icon-check" />
 								</p:column>
@@ -81,19 +82,6 @@
 							filterBy="#{sprint.id}" filterMatchMode="contains">
 							<h:outputText value="#{sprint.id}" />
 						</p:column>
-<!-- 						<p:column headerText="Meta" sortBy="#{sprint.meta}" -->
-<!-- 							filterBy="#{sprint.meta}" filterMatchMode="contains"> -->
-<!-- 							<p:cellEditor> -->
-<!-- 								<f:facet name="output"> -->
-<!-- 									<h:outputText value="#{sprint.meta}" /> -->
-<!-- 								</f:facet> -->
-<!-- 								<f:facet name="input"> -->
-<!-- 									<p:inputText id="meta" value="#{sprint.meta}" /> -->
-<!-- 								</f:facet> -->
-<!-- 							</p:cellEditor> -->
-<!-- 						</p:column> -->
-						
-						
 						<p:column headerText="Meta" sortBy="#{sprint.meta}"
 							filterBy="#{sprint.meta}" filterMatchMode="contains">
 							<p:cellEditor>
@@ -101,26 +89,20 @@
 									<h:outputText value="#{sprint.meta}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:selectOneMenu id="meta"
-										value="#{sprint.meta}" styleClass="one-menu-edit without-trigger">
-										<f:selectItem itemLabel="Selecione a meta" itemValue=""
-											noSelectionOption="true" />
-										<f:selectItems value="#{sprintBean.backlogs}" />
-									</p:selectOneMenu>
-
-<!-- 									<p:selectManyMenu id="meta" value="#{sprint.meta}" -->
-<!-- 										var="m" filter="true" filterMatchMode="contains" -->
-<!-- 										showCheckbox="true"> -->
+<!-- 									<p:selectCheckboxMenu id="menu" -->
+<!-- 										value="#{sprintBean.metas}" label="Backlogs" filter="true" -->
+<!-- 										filterMatchMode="contains"> -->
+<!-- 										<p:ajax event="change" partialSubmit="false" -->
+<!-- 											value="#{sprintBean.metas}" -->
+<!-- 											listener="#{sprintBean.onCellEdit(sprint)}" -->
+<!-- 											update=":listItems:listMsgs" /> -->
 <!-- 										<f:selectItems value="#{sprintBean.backlogs}" var="b" -->
 <!-- 											itemLabel="#{b.nome}" itemValue="#{b.nome}" /> -->
-<!-- 									</p:selectManyMenu> -->
-
+<!-- 										</p:selectCheckboxMenu> -->
+									<p:inputText id="meta" value="#{sprint.meta}" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						
-						
-						
 						<p:column headerText="Definição de Pronto"
 							sortBy="#{sprint.definicaoPronto}"
 							filterBy="#{sprint.definicaoPronto}" filterMatchMode="contains">
@@ -191,8 +173,9 @@
 									target="#{sprintBean.sprint}" />
 							</p:commandButton>
 
-							<p:commandButton value="Ver" action="#{sprintBean.goSprintDetail}">
-							<f:setPropertyActionListener target="#{sprintBean.sprint}"
+							<p:commandButton value="Ver"
+								action="#{sprintBean.goSprintDetail}">
+								<f:setPropertyActionListener target="#{sprintBean.sprint}"
 									value="#{sprint}"></f:setPropertyActionListener>
 							</p:commandButton>
 

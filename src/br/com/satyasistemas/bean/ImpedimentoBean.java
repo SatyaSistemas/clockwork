@@ -105,6 +105,7 @@ public class ImpedimentoBean implements Serializable {
 	
 	public void update(){
 		impedimento = new Impedimento();
+		impedimentoDAO.getEntityManager().close();
 		impedimentoDAO = new ImpedimentoDAO();
 		impedimentos = impedimentoDAO.list();
 	}

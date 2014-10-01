@@ -64,5 +64,9 @@ public class ImpedimentoDAO implements DAO<Impedimento>,Serializable{
 	private void closeTransaction(){
 		entityManager.getTransaction().commit();
 	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
 	
 }

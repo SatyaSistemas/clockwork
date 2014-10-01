@@ -109,6 +109,7 @@ public class BacklogBean implements Serializable {
 	
 	public void update(){
 		productBacklog = new ProductBacklog();
+		backlogDAO.getEntityManager().close();
 		backlogDAO = new ProductBacklogDAO();
 		itensBacklog = backlogDAO.list();
 	}

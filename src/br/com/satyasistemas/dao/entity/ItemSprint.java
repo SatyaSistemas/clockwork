@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -39,10 +40,12 @@ public class ItemSprint implements Serializable {
 	
 	private String observacoes;
 	
+	@Min(value = 1, message="A prioridade deve ser maior que 0.")
 	private int prioridade;
 	
 	private String responsavel;
 	
+	@NotEmpty(message="Situação não informada.")
 	private String situacao;
 
 	@JoinColumn(name = "fk_sprint")

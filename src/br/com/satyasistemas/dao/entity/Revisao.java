@@ -1,7 +1,10 @@
 package br.com.satyasistemas.dao.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
@@ -21,8 +24,10 @@ public class Revisao implements Serializable {
 	@GeneratedValue
 	private int id;
 
+	@NotEmpty(message="Descrição não informada.")
 	private String descricao;
 
+	@NotEmpty(message="Tipo não informado.")
 	private String tipo;
 
 	@JoinColumn(name="fk_sprint")

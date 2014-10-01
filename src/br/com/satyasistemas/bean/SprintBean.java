@@ -16,11 +16,8 @@ import org.primefaces.push.EventBusFactory;
 
 import br.com.satyasistemas.dao.ProductBacklogDAO;
 import br.com.satyasistemas.dao.SprintDAO;
-import br.com.satyasistemas.dao.UsuarioDAO;
 import br.com.satyasistemas.dao.entity.ProductBacklog;
-//import br.com.satyasistemas.dao.entity.ProductBacklog;
 import br.com.satyasistemas.dao.entity.Sprint;
-import br.com.satyasistemas.dao.entity.Usuario;
 
 @ManagedBean(name = "sprintBean")
 @ViewScoped
@@ -32,6 +29,7 @@ public class SprintBean implements Serializable {
 	private Sprint sprint;
 	private ProductBacklogDAO productBacklogDAO;
 	private int sprintID;
+	private String metas[];
 	
 	public final static String CHANNEL = "/sprintsChange";
 
@@ -40,6 +38,7 @@ public class SprintBean implements Serializable {
 		productBacklogDAO = new ProductBacklogDAO();
 		this.sprints = new ArrayList<Sprint>();
 		this.sprint = new Sprint();
+		
 	}
 	
 	@PostConstruct
@@ -47,8 +46,16 @@ public class SprintBean implements Serializable {
 		sprints = sprintDAO.list();
 	}
 
-
+	public String createString(String s[]){
+		String ret = s[0] + ";"; // inicializando a strin de retorno com a primeira opçao para tirar o null
+		for (int i = 1; i < s.length; i++){ 
+		ret = ret + " " + s[i] + "; ";	// preenchendo o resto  das opçoes no formato correto
+		}
+		return ret;	// retorna as opções no formato correto
+	}
+	
 	public void addSprintItem() {
+		sprint.setMeta(createString(metas));
 		if(sprint.getMeta() == null 
 			|| sprint.getMeta().equals("") 
 			|| sprint.getTamanho() < 1 
@@ -73,6 +80,9 @@ public class SprintBean implements Serializable {
 	}
 
 	public void onCellEdit(Sprint sprint) {
+		if (metas != null){
+			sprint.setMeta(createString(metas));
+		}
 		sprintDAO.save(sprint);
 		publishEvent("edited");
 		update();
@@ -103,7 +113,7 @@ public class SprintBean implements Serializable {
 	public String goSprintDetail() {
 		return "pretty:sprintDetail";
 	}
-
+	
 	public int getSprintID() {
 		return sprintID;
 	}
@@ -122,8 +132,18 @@ public class SprintBean implements Serializable {
 	
 	public void update(){
 		sprint = new Sprint();
+		sprintDAO.getEntityManager().close();
 		sprintDAO = new SprintDAO();
 		sprints = sprintDAO.list();
+		metas = null;		
+	}
+
+	public String[] getMetas() {
+		return metas;
+	}
+
+	public void setMetas(String metas[]) {
+		this.metas = metas;
 	}
 
 }

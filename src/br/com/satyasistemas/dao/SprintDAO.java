@@ -18,7 +18,7 @@ public class SprintDAO implements DAO<Sprint>, Serializable{
 	
 	public SprintDAO() {
 		super();
-		this.entityManager = DatabaseUtil.getEmf().createEntityManager();
+		this.setEntityManager(DatabaseUtil.getEmf().createEntityManager());
 	}
 
 	@Override
@@ -26,9 +26,9 @@ public class SprintDAO implements DAO<Sprint>, Serializable{
 		beginTransaction();
 		
 		if(sprint.getId() <= 0)
-			entityManager.persist(sprint);
+			getEntityManager().persist(sprint);
 		else
-			entityManager.merge(sprint);
+			getEntityManager().merge(sprint);
 		
 		closeTransaction();
 	}
@@ -41,14 +41,14 @@ public class SprintDAO implements DAO<Sprint>, Serializable{
 	@Override
 	public void delete(Sprint sprint) {
 		beginTransaction();
-		entityManager.remove(sprint);
+		getEntityManager().remove(sprint);
 		closeTransaction();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Sprint> list() {
-		Query query = entityManager.createNamedQuery("Sprint.findAll");
+		Query query = getEntityManager().createNamedQuery("Sprint.findAll");
 		return query.getResultList();
 	}
 
@@ -58,11 +58,19 @@ public class SprintDAO implements DAO<Sprint>, Serializable{
 	}
 	
 	private void beginTransaction(){
-		entityManager.getTransaction().begin();
+		getEntityManager().getTransaction().begin();
 	}
 	
 	private void closeTransaction(){
-		entityManager.getTransaction().commit();
+		getEntityManager().getTransaction().commit();
+	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 	
 }

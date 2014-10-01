@@ -1,5 +1,6 @@
 package br.com.satyasistemas.dao;
 
+import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.List;
 
@@ -63,6 +64,10 @@ public class ProductBacklogDAO implements DAO<ProductBacklog>, Serializable{
 	
 	private void closeTransaction(){
 		entityManager.getTransaction().commit();
+	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
 	}
 	
 }

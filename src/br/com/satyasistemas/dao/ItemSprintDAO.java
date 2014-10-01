@@ -69,5 +69,9 @@ public class ItemSprintDAO implements DAO<ItemSprint>, Serializable{
 	private void closeTransaction(){
 		entityManager.getTransaction().commit();
 	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
 	
 }
