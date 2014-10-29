@@ -51,22 +51,11 @@ public class SprintDetailBean implements Serializable {
 	
 	
 	public void addItemSprint() {
-		if (item.getNome() == null
-			|| item.getPrioridade() < 1
-			|| item.getSituacao() == null
-				) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Erro ao cadastrar",
-							"Dados inválidos, favor verificar os campos"));
-		} else {
 			this.item.setSprint(sprintId);
 			this.itemSprintDAO.save(item);
 			this.item = new ItemSprint();
 			itemSprintDAO.getEntityManager().close();
 			itemSprintDAO = new ItemSprintDAO();
-		}
 	}
 	
 	

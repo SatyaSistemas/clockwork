@@ -3,6 +3,8 @@ package br.com.satyasistemas.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -23,14 +25,20 @@ public class RevisaoDAO implements DAO<Revisao>, Serializable {
 
 	@Override
 	public void save(Revisao revisao) {
-		beginTransaction();
-
-		if (revisao.getId() <= 0)
-			entityManager.persist(revisao);
-		else
-			entityManager.merge(revisao);
-
-		closeTransaction();
+		if (revisao.getDescricao() == null || revisao.getTipo() == null) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Erro ao cadastrar",
+							"Dados inválidos, favor verificar os campos"));
+		} else {
+			beginTransaction();
+			if (revisao.getId() <= 0)
+				entityManager.persist(revisao);
+			else
+				entityManager.merge(revisao);
+			closeTransaction();
+		}
 	}
 
 	@Override

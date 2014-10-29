@@ -1,9 +1,10 @@
 package br.com.satyasistemas.dao;
 
-import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -24,14 +25,26 @@ public class ProductBacklogDAO implements DAO<ProductBacklog>, Serializable{
 
 	@Override
 	public void save(ProductBacklog backlog) {
-		beginTransaction();
-		if(backlog.getId() > 0){
-			entityManager.merge(backlog);
-		}else{
-			entityManager.persist(backlog);
+		if (backlog.getNome() == null || backlog.getDemonstracao() == null
+				|| backlog.getEstimativa() < 1 || backlog.getImportancia() < 1
+				|| backlog.getSolicitante() == null
+				|| backlog.getNome().equals("")
+				|| backlog.getDemonstracao().equals("")
+				|| backlog.getStatus() == null) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Erro ao cadastrar",
+							"Dados inválidos, favor verificar os campos"));
+		} else {
+			beginTransaction();
+			if (backlog.getId() > 0) {
+				entityManager.merge(backlog);
+			} else {
+				entityManager.persist(backlog);
+			}
+			closeTransaction();
 		}
-		
-		closeTransaction();
 	}
 
 	@Override

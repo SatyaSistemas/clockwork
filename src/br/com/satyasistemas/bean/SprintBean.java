@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -56,25 +55,11 @@ public class SprintBean implements Serializable {
 	
 	public void addSprintItem() {
 		sprint.setMeta(createString(metas));
-		if(sprint.getMeta() == null 
-			|| sprint.getMeta().equals("") 
-			|| sprint.getTamanho() < 1 
-			|| sprint.getTermino().before(sprint.getInicio()) 
-			|| sprint.getTamanhoRealizado() < 0 
-			|| sprint.getTamanhoRealizado() > sprint.getTamanho()
-			 ) {
-				FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Erro ao cadastrar",
-							"Dados inválidos, favor verificar os campos"));
-		} else {
-			sprintDAO.save(sprint);
-			publishEvent("added");
-			update();
-		}
+		sprintDAO.save(sprint);
+		publishEvent("added");
+		update();
 	}
-	
+
 	public List<ProductBacklog> getBacklogs(){
 		return productBacklogDAO.list();
 	}

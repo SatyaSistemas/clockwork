@@ -3,6 +3,8 @@ package br.com.satyasistemas.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -23,14 +25,25 @@ public class ImpedimentoDAO implements DAO<Impedimento>,Serializable{
 
 	@Override
 	public void save(Impedimento impedimento) {
-		beginTransaction();
-		
-		if(impedimento.getId() <= 0)
-			entityManager.persist(impedimento);
-		else
-			entityManager.merge(impedimento);
-		
-		closeTransaction();
+		if (impedimento.getImpedimento() == null
+				|| impedimento.getReportado() == null
+				|| impedimento.getFinalizacao()
+						.before(impedimento.getCriacao())
+				|| impedimento.getFinalizacao() == null
+				|| impedimento.getCriacao() == null) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Erro ao cadastrar",
+							"Dados inválidos, favor verificar os campos"));
+		} else {
+			beginTransaction();
+			if (impedimento.getId() <= 0)
+				entityManager.persist(impedimento);
+			else
+				entityManager.merge(impedimento);
+			closeTransaction();
+		}
 	}
 
 	@Override

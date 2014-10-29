@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import br.com.satyasistemas.dao.UsuarioDAO;
 import br.com.satyasistemas.dao.entity.Usuario;
@@ -50,16 +48,8 @@ public class UsuarioBean implements Serializable {
 	}
 
 	public void addUser() {
-		if (usuario.getNome() == null || usuario.getNome().equals("")) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Erro ao cadastrar",
-							"Dados inválidos, favor verificar os campos"));
-		} else {
 			usuarioDao.save(usuario);
 			usuario = new Usuario();
-		}
 	}
 
 	public void onCellEdit(Usuario usuario) {

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -61,20 +60,9 @@ public class BugBean implements Serializable {
 	}
 
 	public void addBug() {
-		if (bug.getNome() == null
-				|| bug.getNome().equals("")
-				|| bug.getDescricao() == null
-				|| bug.getProjeto() == null) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Erro ao cadastrar",
-							"Dados inválidos, favor verificar os campos"));
-		} else {
 			bugDAO.save(bug);
 			bug = new Bug();
 			publishEvent("added");
-		}
 	}
 
 	public void onCellEdit(Bug bug) {

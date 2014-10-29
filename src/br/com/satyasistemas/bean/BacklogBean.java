@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -61,25 +60,9 @@ public class BacklogBean implements Serializable {
 	}
 
 	public void addBacklogItem() {
-		if (productBacklog.getNome() == null
-			|| productBacklog.getDemonstracao() == null
-			|| productBacklog.getEstimativa() < 1
-			|| productBacklog.getImportancia() < 1
-			|| productBacklog.getSolicitante() == null
-			|| productBacklog.getNome().equals("")
-			|| productBacklog.getDemonstracao().equals("")
-			|| productBacklog.getStatus() == null
-				) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Erro ao cadastrar",
-							"Dados inválidos, favor verificar os campos"));
-		} else {
-			backlogDAO.save(productBacklog);
-			publishEvent("added");
-			update();
-		}
+		backlogDAO.save(productBacklog);
+		publishEvent("added");
+		update();
 	}
 
 	public void onCellEdit(ProductBacklog backlog) {

@@ -3,6 +3,8 @@ package br.com.satyasistemas.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -23,14 +25,21 @@ public class UsuarioDAO implements DAO<Usuario>,Serializable{
 
 	@Override
 	public void save(Usuario usuario) {
-		beginTransaction();
-		
-		if(usuario.getId() <= 0)
-			entityManager.persist(usuario);
-		else
-			entityManager.merge(usuario);
-		
-		closeTransaction();
+		if (usuario.getNome() == null || usuario.getNome().equals("")) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Erro ao cadastrar",
+							"Dados inválidos, favor verificar os campos"));
+		} else {
+			beginTransaction();
+			if (usuario.getId() <= 0) {
+				entityManager.persist(usuario);
+			} else {
+				entityManager.merge(usuario);
+			}
+			closeTransaction();
+		}
 	}
 
 	@Override

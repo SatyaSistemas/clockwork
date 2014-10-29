@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -43,23 +42,10 @@ public class ImpedimentoBean implements Serializable {
 	}
 	
 	public void addImpedimento() {
-		if(impedimento.getImpedimento() == null 
-			|| impedimento.getReportado() == null 
-			|| impedimento.getFinalizacao().before(impedimento.getCriacao()) 
-			|| impedimento.getFinalizacao() == null 
-			|| impedimento.getCriacao() == null
-			 ) {
-				FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Erro ao cadastrar",
-							"Dados inválidos, favor verificar os campos"));
-		} else {
-			impedimentoDAO.save(impedimento);
-			this.impedimento = new Impedimento();
-			publishEvent("added");
-			update();
-		}
+		impedimentoDAO.save(impedimento);
+		this.impedimento = new Impedimento();
+		publishEvent("added");
+		update();
 	}
 	
 	

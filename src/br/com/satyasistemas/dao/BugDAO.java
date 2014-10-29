@@ -3,6 +3,8 @@ package br.com.satyasistemas.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -23,14 +25,22 @@ public class BugDAO implements DAO<Bug>, Serializable{
 
 	@Override
 	public void save(Bug bug) {
-		beginTransaction();
-		if(bug.getId() > 0){
-			entityManager.merge(bug);
-		}else{
-			entityManager.persist(bug);
+		if (bug.getNome() == null || bug.getNome().equals("")
+				|| bug.getDescricao() == null || bug.getProjeto() == null) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Erro ao cadastrar",
+							"Dados inválidos, favor verificar os campos"));
+		} else {
+			beginTransaction();
+			if (bug.getId() > 0) {
+				entityManager.merge(bug);
+			}else{
+				entityManager.persist(bug);
+			}
+			closeTransaction();
 		}
-		
-		closeTransaction();
 	}
 
 	@Override

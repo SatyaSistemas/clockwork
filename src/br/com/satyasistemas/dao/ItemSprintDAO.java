@@ -3,6 +3,8 @@ package br.com.satyasistemas.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -23,14 +25,22 @@ public class ItemSprintDAO implements DAO<ItemSprint>, Serializable{
 
 	@Override
 	public void save(ItemSprint item) {
-		beginTransaction();
-		
-		if(item.getId() <= 0)
-			entityManager.persist(item);
-		else
-			entityManager.merge(item);
-		
-		closeTransaction();
+		if (item.getNome() == null || item.getPrioridade() < 1
+				|| item.getSituacao() == null) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Erro ao cadastrar",
+							"Dados inválidos, favor verificar os campos"));
+		} else {
+			beginTransaction();
+			if (item.getId() <= 0) {
+				entityManager.persist(item);
+			} else {
+				entityManager.merge(item);
+			}
+			closeTransaction();
+		}
 	}
 
 	@Override
